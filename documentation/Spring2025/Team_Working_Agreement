@@ -1,1 +1,40 @@
+# Team Guidelines
 
+## Regular Meeting Time
+**Schedule:** Monday, Wednesday, Friday after class (after 12:30 PM CST)  
+**Purpose:**
+- Discuss progress
+- Address roadblocks
+- Plan the next steps for the team and the project
+- Ensure coherency
+
+## Definition of Done
+A task is considered complete when:
+- Code is written according to the team’s standards.
+- Code is reviewed and approved by a peer.
+- Code is properly tested and documented.
+- Code is integrated into the main branch without any issues.
+- The customer is satisfied with the work.
+
+## Communication Channel
+- Use **Slack** or **email** for communication.
+
+## Team Approach to Work
+- Assign work to individual team members.
+- Keep team members, the TA, and the customer updated on progress.
+- Seek constant feedback on the work.
+
+## Focus and Minimize Distractions
+- **In-person meetings:** Choose a quiet location with minimal disturbances.
+- **Online meetings:**
+  - Team members should be in a quiet place.
+  - Mute the mic when someone else is speaking to ensure clarity.
+  - Avoid engaging in unrelated activities to maintain productivity.
+
+## Tools
+- **Ruby on Rails**
+
+## Documentation and Artifacts
+- All documents should be stored in **GitHub**.
+- Everyone should have access to the GitHub repository.
+- Each team member is responsible for maintaining an **organized GitHub repository** for easy access.
