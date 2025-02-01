@@ -1,0 +1,45 @@
+﻿Sprint 1
+
+
+Regular Meeting Time
+* Schedule: Monday, Wednesday, Friday after class (after 12.30 pm CST)
+* Purpose: Discuss progress, address the roadblockers, plan the next steps for the team and the project, ensure coherency
+
+
+Definition of Done
+* Code is written according to the team’s standard 
+* Code is tested/ reviewed by peer and approved
+* Code is properly tested and documented
+* It is integrated to the main branch without any issues
+* The customer is satisfied with the work
+
+
+Communication Channel
+* Use Slack or email for communication
+
+
+Team Approach to Work
+* Assign work for individual team members
+* Keep the team members, TA and the customer updated about the work
+* Ask for constant feedback on the work
+
+
+Focus and Minimize Distraction
+* If the meeting is in-person, set up the meeting at a quiet location with minimal disturbances
+* If the meeting is online, each of the team members should be working at quiet place, mute the mic if someone is speaking so that everyone can hear properly
+* The team members shouldn’t be engaging in any other activities other than the project work when the team is working together to ensure productivity. 
+
+
+Tools 
+* Ruby on Rails
+
+
+Documentation and Artifacts
+* All documents should be stored in Github
+* Everyone should have access to the github repository
+* Every team member is responsible for maintaining an organized github for easier access for the team
+
+
+Transparency in Product and Sprint Backlog
+* The team needs to maintain a product backlog with prioritized features, improvements, and bug fixes.
+* The team needs to regularly update the sprint backlog to ensure tasks align with sprint goals.
