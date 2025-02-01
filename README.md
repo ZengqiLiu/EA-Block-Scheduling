@@ -1,4 +1,6 @@
 # Engineering Academy Block Schedule Generator
+## Technical Work Agreement (TWA)
+https://github.com/patibas-tamu/EA-Block-Scheduling/blob/main/documentation/Spring2025/Sprint_1_Plan.pdf
 ## Important Links
 + Deployed App: https://ea-block-scheduler-4fecd886e389.herokuapp.com/
 + Code Climate: https://codeclimate.com/github/tamu-edu-students/EA-Block-Scheduling
