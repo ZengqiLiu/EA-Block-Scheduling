@@ -8,6 +8,11 @@ Feature: User Management
     When I visit the users index page
     Then I should see a list of users
 
+  Scenario: Admin views the upload element on the users index page
+    Given users exist
+    When I visit the users index page
+    Then I should see the spreadsheet upload button
+
   Scenario: Admin views a user's details
     Given a user exists
     When I visit the user's show page
