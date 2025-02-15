@@ -1,0 +1,40 @@
+graph TD
+
+    subgraph View
+        direction TB
+        StudentUI[Student UI]
+        AdminUI[Admin UI]
+    end
+
+    subgraph Controller
+        direction TB
+        AccessControl[Access Control Layer]
+        subgraph APIs
+            direction LR
+            UserAPI[User Management API]
+            ScheduleAPI[Block Schedule API]
+            CourseAPI[Course API]
+        end
+
+    end
+
+    subgraph Model
+        Database[(Database)]
+    end
+
+    %% graph ordering
+    View ---->|Interacts With| Controller
+    Controller --->|Stores Data In| Model
+
+    %% view to controller connections
+    StudentUI -->|Self-View| APIs
+    StudentUI -->|Self-Assign| ScheduleAPI
+    AdminUI -->|Full CRUD| APIs
+
+    %% API to model connections
+    ScheduleAPI -->|Manages Schedules| Database
+    UserAPI -->|Manages Users| Database
+    CourseAPI -->|Manages Courses| Database
+
+    %% Access Control Layer
+    AccessControl -.->|Enforces Permissions| APIs
