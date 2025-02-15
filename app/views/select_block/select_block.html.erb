@@ -1,0 +1,118 @@
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h1 {
+    color: #800000; /* Maroon color */
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #800000; /* Maroon color */
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  .block-container {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  #select-block-button {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 24px;
+    background-color: #800000; /* Maroon color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+  }
+
+  #select-block-button:hover {
+    background-color: #6a0000; /* Darker maroon for hover */
+  }
+
+  #schedule-banner {
+    width: 80%;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    text-align: center;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  #schedule-banner a {
+    color: #800000; /* Maroon color for links */
+    text-decoration: none;
+    margin: 0 10px;
+  }
+
+  #schedule-banner a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<h1>Select Your Block</h1>
+
+<!-- Blocks -->
+<div class="block-container">
+  <% @block_count.times do |i| %>
+    <%= render 'block_to_select', block_number: i + 1 %>
+  <% end %>
+</div>
+
+
+<!-- Select Block Button -->
+<button id="select-block-button" class="generate-button">Select Block</button>
+
+<!-- Hidden Banner for Generated Schedule -->
+<div id="schedule-banner" style="display: none;">
+  <p>2 schedules generated</p>
+  <a href="#">View Schedule 1</a> | <a href="#">View Schedule 2</a>
+</div>
+
+<script>
+  document.getElementById('select-block-button').addEventListener('click', function() {
+    // Simulate generating schedules and showing the banner
+    const generatedSchedulesCount = 2; // Example count, you may replace this with actual logic
+    document.getElementById('schedule-banner').style.display = 'block';
+    document.getElementById('schedule-banner').innerHTML = `${generatedSchedulesCount} schedules generated <br> <a href="#">View Schedule 1</a> | <a href="#">View Schedule 2</a>`;
+});
+</script>
