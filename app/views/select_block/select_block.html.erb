@@ -41,6 +41,19 @@ body {
     background-color: #ddd;
   }
 
+  .block-to-select {
+    flex: 0 0 auto;
+    width: 400px;
+    min-height: 250px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+  }
+  .block-to-select.disabled {
+      background-color: lightgray;
+  }
+
   .block-container {
     width: 80%;
     margin: 20px auto;
@@ -114,5 +127,33 @@ body {
     const generatedSchedulesCount = 2; // Example count, you may replace this with actual logic
     document.getElementById('schedule-banner').style.display = 'block';
     document.getElementById('schedule-banner').innerHTML = `${generatedSchedulesCount} schedules generated <br> <a href="#">View Schedule 1</a> | <a href="#">View Schedule 2</a>`;
-});
+  });
+
+
+  const maxSelectedBlocks = 1;
+  const checkboxes = document.querySelectorAll('.block-to-select input[type="checkbox"]');
+
+  function disableMoreSelections() {
+    let selectedCount = 0;
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        selectedCount++;
+      }
+    });
+
+    // Grey out unselected blocks if max selected blocks is reached
+    checkboxes.forEach(checkbox => {
+      const currentBlock = checkbox.closest('.block-to-select');
+      if (selectedCount >= maxSelectedBlocks && !checkbox.checked) {
+        currentBlock.classList.add('disabled');
+        checkbox.disabled = true;
+      } else {
+        currentBlock.classList.remove('disabled');
+        checkbox.disabled = false;
+      }
+    });
+  }
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', disableMoreSelections);
+    });
 </script>
