@@ -60,4 +60,7 @@ Rails.application.routes.draw do
   end
   # Add this line for user profile
   get "user/profile", to: "users#profile", as: :user_profile_view
+
+  # Add this line for selecting a block
+  get 'select_block', to: 'select_block#select_block', as: :select_block
 end
