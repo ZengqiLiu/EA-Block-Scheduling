@@ -115,7 +115,7 @@ body {
 <!-- Blocks -->
 <div class="block-container">
   <% @block_count.times do |i| %>
-    <%= render 'block_to_select', block_number: i + 1 %>
+    <%= render partial: "select_block/block_to_select", locals: { block_number: i + 1 } %>
   <% end %>
 </div>
 
