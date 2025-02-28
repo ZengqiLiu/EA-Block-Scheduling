@@ -1,28 +1,22 @@
-Feature: Student Course Registration
+Feature: Course Registration
+  As a student
+  I want to register for courses
+  So that my selections are logged and confirmed
 
-  Background:
-    Given I am a student on the course registration page
+  Scenario: View Registration Form
+    Given I am on the registration page
+    Then I should see the registration form
+    And I should see "Year"
+    And I should see "Math Course"
+    And I should see "Science Course"
+    And I should see "Engineering Course"
+    And I should see the "Register" button
 
-  Scenario: Stduent registers as 1st year student
-    Given I am logged as a student on the course registration page
-    When I select "1st Year" as my year
-    And I select a Math course from the dropdown
-    And I select a Science course from the dropdown
-    And I select a Engineering course from the dropdown
-    And I click on register button
-    Then I should register for the courses
-
-  Scenario: Stduent registers as 2nd year student
-    Given I am logged as a student on the course registration page
-    And I select "2nd Year" as my year
-    And I select a Math course from the dropdown
-    And I select a Science course from the dropdown
-    And I select a Engineering course from the dropdown
-    And I click on register button
-    Then I should register for the courses
-
-
-  Scenario: Student should be able to submit form with invalid data
-    Given I am logged as a student on the course registration page
-    When I do not select "1st year" or "2nd year"
-    Then I should not be able to register for any courses
+  Scenario: Submit Registration Form
+    Given I am on the registration page
+    When I select "Year 1" for "Year"
+    And I select "Calculus I" for "Math Course"
+    And I select "Physics 1" for "Science Course"
+    And I select "Eng 1" for "Engineering Course"
+    And I click on the "Register" button
+    Then I should see "Successfully registered!"

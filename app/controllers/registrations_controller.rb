@@ -18,8 +18,4 @@ class RegistrationsController < ApplicationController
   end
 
   private
-
-  def registration_params
-    params.require(:registration).permit(:year, :math_course, :science_course, :engineering_course)
-  end
 end

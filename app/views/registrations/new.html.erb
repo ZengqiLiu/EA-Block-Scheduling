@@ -13,8 +13,10 @@
     <%= form_with url: register_path, method: :post do %>
       <div>
         <label>Year:</label>
-        <input type="radio" name="year" value="1" checked class="year-select"> Year 1
+        <input type="radio" id="year_1" name="year" value="1" checked class="year-select">
+        <label for="year_1">Year 1</label>
         <input type="radio" name="year" value="2" class="year-select"> Year 2
+        <label for="year_2">Year 1</label>
       </div>
 
       <div>
@@ -28,15 +30,15 @@
       <div>
         <label>Science Course:</label>
         <select name="science_course" class="science-select">
-            <option>Physics I</option>
-            <option>Chemistry I</option>
+            <option>Physics 1</option>
+            <option>Chemistry 1</option>
         </select>
       </div>
 
       <div>
         <label>Engineering Course:</label>
         <select name="engineering_course" class="engineering-select">
-            <option>Eng I</option>
+            <option>Eng 1/option>
             <option>Eng 2</option>
         </select>
       </div>
