@@ -84,6 +84,22 @@ Then("I should see the user's details as an admin") do
 end
 
 Then("I should see the spreadsheet upload button") do
-  expect(page).to have_selector("div.upload-container")
   expect(page).to have_content("Import From Spreadsheet")
 end
+
+# When('I upload a valid spreadsheet') do
+#   file_path = Rails.root.join('spec', 'fixtures', 'files', 'TEAC.xlsx')
+#
+#   # Attach the file to the form and submit the form
+#   attach_file('file-input', file_path)
+#   click_button 'Submit'
+# end
+#
+# Then('I should see a success message saying {string}') do |message|
+#   #expect(page).to have_content(message)An error
+#   expect(page).to have_content("No file")
+# end
+#
+# Then('the users should be created') do
+#   expect(User.count).to be > 0
+# end

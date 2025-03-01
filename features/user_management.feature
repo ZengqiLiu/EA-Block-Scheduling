@@ -29,3 +29,9 @@ Feature: User Management
     Given a user exists
     When I delete the user
     Then I should see a confirmation message
+
+#  Scenario: Uploading a valid spreadsheet
+#    When I visit the users index page
+#    And I upload a valid spreadsheet
+#    Then I should see a success message saying "Users have been uploaded successfully."
+#    And the users should be created

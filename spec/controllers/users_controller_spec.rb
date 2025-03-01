@@ -112,4 +112,38 @@ RSpec.describe UsersController, type: :controller do
       expect(assigns(:user)).to eq(user0)
     end
   end
+
+  describe 'POST #upload' do
+    let(:valid_file) { fixture_file_upload('TEAC.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') }
+    let(:invalid_file) { fixture_file_upload('invalid_file.txt', 'text/plain') }
+
+    context 'with a valid file' do
+      it 'uploads users and redirects to the users index' do
+        allow(UserService).to receive(:process_users_spreadsheet).and_return(true)
+
+        post :upload, params: { file: valid_file }
+
+        expect(response).to redirect_to(users_path)
+        expect(flash[:success]).to eq("Users have been uploaded successfully.")
+      end
+    end
+
+    context 'with an invalid file' do
+      it 'does not upload users and renders the upload form' do
+        allow(UserService).to receive(:process_users_spreadsheet).and_raise(StandardError, "Invalid file format")
+
+        post :upload, params: { file: invalid_file }
+
+        expect(flash[:error]).to eq("An error occurred while processing the file: Invalid file format")
+      end
+    end
+
+    context 'with no file selected' do
+      it 'does not upload users and renders the upload form' do
+        post :upload, params: { file: nil }
+
+        expect(flash[:error]).to eq("No file selected or file is invalid.")
+      end
+    end
+  end
 end
