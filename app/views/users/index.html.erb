@@ -2,19 +2,47 @@
 <br>
 <h3>Add New Users</h3>
 
-<div class="upload-container">
+<%= form_with(url: users_upload_path, method: :post, local: true, html: { class: 'upload-container' }) do |form| %>
+  <% if flash[:error] %>
+    <div class="flash flash-error"><%= flash[:error] %></div>
+  <% end %>
+  <% if flash[:success] %>
+    <div class="flash flash-success"><%= flash[:success] %></div>
+  <% end %>
+
   <div class="left-section">
-    <button class="btn btn--primary">Import From Spreadsheet</button>
-    <span class="file-path">C:/Directory/spreadsheet.xlsx</span>
+    <%= form.label :file, "Import From Spreadsheet", class: "btn btn--primary", for: "file-input" %>
+    <%= form.file_field :file, style: 'opacity: 0; position: absolute; left: -9999px;', accept: '.xlsx', id: 'file-input' %>
+    <span class="file-path" id="file-path"><%= @file_path || 'No file selected' %></span>
   </div>
+
   <div class="right-section">
     <span>Select a .xlsx to upload</span>
     <div class="button-group">
-      <button class="button button-secondary">Cancel</button>
-      <button class="button">Submit</button>
+      <button type="button" id="cancel-btn" class="button button-secondary">Cancel</button>
+      <%= form.submit 'Submit', class: "button" %>
     </div>
   </div>
-</div>
+<% end %>
+
+
+<script>
+    // update file-path when a file has been picked
+    document.getElementById("file-input").addEventListener("change", function() {
+        var filePath = document.getElementById("file-input").value;
+        var fileName = filePath.split("\\").pop();
+        document.getElementById("file-path").textContent = fileName || "No file selected";
+    });
+
+    // clear the file when cancel is clicked
+    document.getElementById("cancel-btn").addEventListener("click", function() {
+        var fileInput = document.getElementById("file-input");
+        fileInput.value = "";
+        document.getElementById("file-path").textContent = "No file selected";
+    });
+</script>
+
+
 <br>
 <h3>Existing Users</h3>
 <table class="table">

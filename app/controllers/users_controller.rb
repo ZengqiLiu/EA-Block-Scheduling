@@ -26,6 +26,26 @@ class UsersController < ApplicationController
     redirect_to user_path
   end
 
+  def upload
+
+    if params[:file].present?
+      uploaded_file = params[:file]
+      @file_path = uploaded_file.original_filename
+
+      begin
+        UserService.process_users_spreadsheet(uploaded_file)
+        flash[:success] = "Users have been uploaded successfully."
+        redirect_to users_path
+      rescue => e
+        flash[:error] = "An error occurred while processing the file: #{e.message}"
+        return
+      end
+    else
+      flash[:error] = "No file selected or file is invalid."
+      return
+    end
+  end
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy

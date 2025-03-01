@@ -11,10 +11,13 @@ gem "omniauth-microsoft_graph"
 gem "puma", ">= 5.0" # Use the Puma web server [https://github.com/puma/puma]
 gem "rails", "~> 7.2.1" # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "roo"  # For parsing Excel files
+gem 'rubyXL'
+gem 'activerecord-import'
 gem "simple_form"  # For easier form handling
 gem "sprockets-rails" # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "stimulus-rails" # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "turbo-rails" # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "tzinfo-data", platforms: %i[windows jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # omniauth for google login
 gem "omniauth"
@@ -51,6 +54,7 @@ group :development, :test do
   gem "cucumber-rails", require: false
   gem "database_cleaner"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  # gem "debug", platforms: %i[mri mingw mswin x64_mingw], require: "debug/prelude"
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
   gem "rails-controller-testing"
   # Setting Rspec to dev
