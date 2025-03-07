@@ -1,4 +1,11 @@
 Given("I am logged in as an admin") do
+  # Create a test user in DB
+  User.create!(
+    email: 'adminuser@example.com',
+    first_name: 'Admin',
+    last_name: 'User',
+    role: 'admin',
+  )
   # Mock the OmniAuth response for an admin user
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
@@ -19,6 +26,14 @@ Given("I am logged in as an admin") do
 end
 
 Given("I am logged in as a student") do
+  # Create a test user in DB
+  User.create!(
+    email: 'studentuser@example.com',
+    first_name: 'Student',
+    last_name: 'User',
+    role: 'student',
+    uid: '67890',
+  )
   # Mock the OmniAuth response for a student user
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
@@ -62,8 +77,8 @@ Then("the response should be successful") do
   expect(page.status_code).to eq(200)  # Ensure the page load was successful
 end
 
-Then("I should be redirected to students dashboard") do
-  expect(current_path).to eq(students_dashboard_path)
+Then("I should be redirected to home page") do
+  expect(current_path).to eq("/")
 end
 
 Then("I should see an alert message {string}") do |message|
