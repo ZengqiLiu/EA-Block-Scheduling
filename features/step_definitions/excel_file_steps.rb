@@ -3,6 +3,14 @@ include Rails.application.routes.url_helpers
 World(Rails.application.routes.url_helpers)
 
 Given("I am logged in as a test user") do
+  # Create a test user in DB
+  User.create!(
+    email: 'testuser@example.com',
+    first_name: 'Test',
+    last_name: 'User',
+    role: 'admin',
+    uid: '67890',
+  )
   # Mock the OmniAuth response for a test user
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
