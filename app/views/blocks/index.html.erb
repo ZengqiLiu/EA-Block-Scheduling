@@ -10,6 +10,11 @@
     <%= link_to "EXPORT TO EXCEL", 
                 export_blocks_path(format: :xlsx), 
                 class: "btn btn--primary" %>
+    
+    <%= link_to "SELECT BLOCK", 
+                "#", 
+                id: "select-block-modal",
+                class: "btn btn--primary" %>
   </div>
 
   <% if notice %>
@@ -20,7 +25,10 @@
     <% if @generated_blocks&.any? %>
       <% @generated_blocks.each_with_index do |block, index| %>
         <div class="block">
-          <h3>Block <%= index + 1 %></h3>
+          <h3>
+            <input type="checkbox" name="selected_blocks[]" value="<%= index + 1 %>">
+            Block <%= index + 1 %>
+          </h3>
           <ul>
             <% block.courses.each do |course| %>
               <li>
