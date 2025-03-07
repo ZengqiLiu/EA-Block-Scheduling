@@ -203,6 +203,11 @@
   text-align: center;
 }
 
+.btn--primary.disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
 .maroon-bg {
   background-color: #500000;
 }
