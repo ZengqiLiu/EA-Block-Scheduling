@@ -24,23 +24,7 @@
   <div class="blocks-container">
     <% if @generated_blocks&.any? %>
       <% @generated_blocks.each_with_index do |block, index| %>
-        <div class="block">
-          <h3>
-            <input type="checkbox" name="selected_blocks[]" value="<%= index + 1 %>">
-            Block <%= index + 1 %>
-          </h3>
-          <ul>
-            <% block.courses.each do |course| %>
-              <li>
-                <strong><%= course.sec_name %></strong>
-                <div class="course-details">
-                  <%= course.days %> 
-                  <%= course.start_time %> - <%= course.end_time %>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+        <%= render partial: "block", locals: { block: block, index: index } %>
       <% end %>
     <% else %>
       <p>No blocks available to display</p>
@@ -53,7 +37,8 @@
   <!-- Hidden Modal for successful selection -->
   <div id="modal" style="display: none;">
     <p id="modal-message"></p>
-    <div class="modal-button-container">
+    <div id="modal-block-content"></div>
+    <div class="modal-buttons">
       <%= link_to "SELECT AGAIN", 
                   "#", 
                   id: "modal-select-again",

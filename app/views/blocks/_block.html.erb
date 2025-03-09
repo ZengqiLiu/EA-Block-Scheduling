@@ -1,5 +1,8 @@
 <div class="block">
-  <h3>Block <%= block.id || index + 1 %></h3>
+  <h3 class="block-title">
+    <input type="checkbox" name="selected_blocks[]" value="<%= index + 1 %>">
+    Block <%= index + 1 %>
+  </h3>
   <ul>
     <% block.courses.each do |course| %>
       <li>
