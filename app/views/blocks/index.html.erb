@@ -54,8 +54,15 @@
   <div id="modal" style="display: none;">
     <p id="modal-message"></p>
     <div class="modal-button-container">
-      <button id="modal-select-again" class="button">Select Again</button>
-      <button id="modal-back-to-schedule" class="button">Back to my schedule</button>
+      <%= link_to "SELECT AGAIN", 
+                  "#", 
+                  id: "modal-select-again",
+                  class: "btn btn--primary" %>
+      <%= button_to "BACK TO MY SCHEDULE", 
+                  "/schedule_viewer", 
+                  method: :get, 
+                  id: "modal-back-to-schedule", 
+                  class: "btn btn--primary" %>
     </div>
   </div>
 

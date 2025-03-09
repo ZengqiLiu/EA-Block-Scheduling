@@ -9,7 +9,6 @@ export default class extends Controller {
     const modal = document.getElementById('modal')
     const modalMessage = document.getElementById('modal-message')
     const modalSelectAgain = document.getElementById('modal-select-again')
-    const modalBackToSchedule = document.getElementById('modal-back-to-schedule')
     const maxSelectedBlocks = 1
 
     const disableMoreSelections = () => {
@@ -56,9 +55,9 @@ export default class extends Controller {
 
       if (selectedBlocks.length > 0) {
         const message = selectedBlocks.length === 1
-          ? `You have successfully selected block ${selectedBlocks[0]}.`
-          : `You have successfully selected blocks ${selectedBlocks.join(', ')}.`
-        modalMessage.textContent = message
+          ? `You have successfully selected <strong>Block ${selectedBlocks[0]}</strong>.`
+          : `You have successfully selected <strong>Blocks ${selectedBlocks.join(', ')}</strong>.`
+        modalMessage.innerHTML = message
         modal.style.display = 'block'
         modalOverlay.style.display = 'block'
       }
@@ -67,10 +66,6 @@ export default class extends Controller {
     modalSelectAgain.addEventListener('click', () => {
       modal.style.display = 'none'
       modalOverlay.style.display = 'none'
-    })
-
-    modalBackToSchedule.addEventListener('click', () => {
-      window.location.href = '/schedule_viewer'
     })
   }
 }
