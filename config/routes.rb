@@ -65,5 +65,5 @@ Rails.application.routes.draw do
   get "user/profile", to: "users#profile", as: :user_profile_view
 
   # Add this line for selecting a block
-  get 'select_block', to: 'select_block#select_block', as: :select_block
+  resource :block_selection, only: [:create]
 end

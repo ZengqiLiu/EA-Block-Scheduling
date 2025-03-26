@@ -10,26 +10,31 @@
     <%= link_to "EXPORT TO EXCEL", 
                 export_blocks_path(format: :xlsx), 
                 class: "btn btn--primary" %>
-    
-    <%= link_to "SELECT BLOCK", 
-                "#", 
-                id: "select-block-button",
-                class: "btn btn--primary" %>
+          
+    <%= button_to "SELECT BLOCK", 
+                  block_selection_path,
+                  id: "select-block-button",
+                  method: :post,
+                  form: { id: "block-selection-form" },
+                  class: "btn btn--primary" %>
   </div>
 
   <% if notice %>
     <div class="notice"><%= notice %></div>
   <% end %>
 
-  <div class="blocks-container">
-    <% if @generated_blocks&.any? %>
-      <% @generated_blocks.each_with_index do |block, index| %>
-        <%= render partial: "block", locals: { block: block, index: index } %>
+  <!-- Wrap the blocks container in a form -->
+  <%= form_with url: block_selection_path, method: :post, local: true do %>
+    <div class="blocks-container">
+      <% if @generated_blocks&.any? %>
+        <% @generated_blocks.each_with_index do |block, index| %>
+          <%= render partial: "block", locals: { block: block, index: index } %>
+        <% end %>
+      <% else %>
+        <p>No blocks available to display</p>
       <% end %>
-    <% else %>
-      <p>No blocks available to display</p>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
   
   <!-- Hidden Modal overlay for successful selection -->
   <div id="modal-overlay" style="display: none;"></div>

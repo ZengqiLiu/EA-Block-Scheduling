@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_01_012435) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_26_024814) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_01_012435) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "block_courses", force: :cascade do |t|
+    t.integer "block_selection_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["block_selection_id"], name: "index_block_courses_on_block_selection_id"
+    t.index ["course_id"], name: "index_block_courses_on_course_id"
+  end
+
+  create_table "block_selections", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_block_selections_on_user_id"
   end
 
   create_table "blocks", force: :cascade do |t|
@@ -130,4 +146,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_01_012435) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "block_courses", "block_selections"
+  add_foreign_key "block_courses", "courses"
+  add_foreign_key "block_selections", "users"
 end
