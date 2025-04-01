@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   # User and session routes
   resources :users, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 
-  post 'users/upload', to: 'users#upload', as: 'users_upload'
+  post "users/upload", to: "users#upload", as: "users_upload"
 
   resource :session, only: [:new, :create, :destroy] do
     collection do

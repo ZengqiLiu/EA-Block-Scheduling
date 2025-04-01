@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def upload
-
     if params[:file].present?
       uploaded_file = params[:file]
       @file_path = uploaded_file.original_filename
@@ -38,11 +37,11 @@ class UsersController < ApplicationController
         redirect_to users_path
       rescue => e
         flash[:error] = "An error occurred while processing the file: #{e.message}"
-        return
+        nil
       end
     else
       flash[:error] = "No file selected or file is invalid."
-      return
+      nil
     end
   end
 

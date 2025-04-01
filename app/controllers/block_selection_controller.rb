@@ -3,7 +3,7 @@ class BlockSelectionController < ApplicationController
 
   def create
     block = Block.new(block_params[:courses])
-    
+
     if block.valid?
       current_user.create_block_selection!(course_ids: block.courses.map(&:id))
       redirect_to dashboard_path, notice: "Block successfully saved."
