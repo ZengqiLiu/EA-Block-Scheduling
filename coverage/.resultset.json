@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/application_controller.rb": {
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -23,7 +23,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/blocks_controller.rb": {
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/blocks_controller.rb": {
         "lines": [
           1,
           null,
@@ -64,7 +64,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/courses_controller.rb": {
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/courses_controller.rb": {
         "lines": [
           1,
           1,
@@ -214,7 +214,7 @@
         ]
       }
     },
-    "timestamp": 1743473882
+    "timestamp": 1743479571
   },
   "Cucumber Features": {
     "coverage": {
@@ -375,7 +375,7 @@
           1,
           null,
           1,
-          250,
+          246,
           null,
           null,
           null,
@@ -413,11 +413,11 @@
           null,
           null,
           1,
-          97,
+          94,
           null,
           null,
           1,
-          81,
+          78,
           null,
           null
         ]
@@ -508,12 +508,6 @@
           2,
           2,
           null,
-          null
-        ]
-      },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/helpers/select_block_helper.rb": {
-        "lines": [
-          1,
           null
         ]
       },
@@ -615,10 +609,10 @@
           null,
           null,
           10,
-          5,
+          35,
           1,
           null,
-          5,
+          35,
           1,
           null,
           null,
@@ -840,12 +834,27 @@
       "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/schedules_controller.rb": {
         "lines": [
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           1,
           null,
+          1,
+          0,
+          0,
           null,
-          3,
+          0,
           null,
           null,
+          null,
+          1,
+          2,
+          0,
           null,
           null,
           null
@@ -907,7 +916,6 @@
           null,
           null,
           1,
-          null,
           0,
           0,
           0,
@@ -942,9 +950,29 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/select_block_controller.rb": {
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/block_selection_controller.rb": {
         "lines": [
           0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
           0,
           0,
           0,
@@ -1015,6 +1043,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1741373151
+    "timestamp": 1743479639
   }
 }
