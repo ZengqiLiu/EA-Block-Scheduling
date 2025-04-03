@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :block_course do
-    block_selection { nil }
-    course { nil }
+    association :block_selection
+    association :course
   end
 end

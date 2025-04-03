@@ -23,6 +23,36 @@
           null
         ]
       },
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/block_selection_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          2,
+          null,
+          2,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
       "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/blocks_controller.rb": {
         "lines": [
           1,
@@ -214,7 +244,7 @@
         ]
       }
     },
-    "timestamp": 1743473882
+    "timestamp": 1743650220
   },
   "Cucumber Features": {
     "coverage": {

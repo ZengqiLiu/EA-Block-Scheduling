@@ -1,4 +1,4 @@
-class BlockSelectionController < ApplicationController
+class BlockSelectionsController < ApplicationController
   before_action :ensure_student
 
   def create
@@ -6,10 +6,11 @@ class BlockSelectionController < ApplicationController
     
     if block.valid?
       current_user.create_block_selection!(course_ids: block.courses.map(&:id))
-      redirect_to dashboard_path, notice: "Block successfully saved."
+      flash[:notice] = "Block successfully selected."
+      redirect_back fallback_location: blocks_path
     else
       flash[:alert] = "Invalid block"
-      redirect_to new_block_selection_path
+      redirect_back fallback_location: blocks_path
     end
   end
 
