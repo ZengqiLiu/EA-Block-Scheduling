@@ -23,6 +23,7 @@ SimpleCov.start do
       'app/controllers/courses_controller.rb',
       'app/controllers/blocks_controller.rb',
       'app/controllers/block_selections_controller.rb',
+      'app/controllers/schedules_controller.rb',
       'app/controllers/application_controller.rb'  # Keep this as it's needed for inheritance
     ]
 
