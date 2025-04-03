@@ -243,6 +243,41 @@
           null
         ]
       },
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/models/course.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          3,
+          3,
+          null,
+          null,
+          1,
+          null,
+          23,
+          23,
+          23,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
       "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/schedules_controller.rb": {
         "lines": [
           1,
@@ -271,13 +306,199 @@
           null,
           null
         ]
+      },
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/models/block_course.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/models/block_selection.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/models/block.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          33,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          4,
+          4,
+          null,
+          4,
+          16,
+          null,
+          4,
+          4,
+          null,
+          null,
+          4,
+          0,
+          null,
+          null,
+          4,
+          4,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          7,
+          null,
+          7,
+          null,
+          7,
+          26,
+          36,
+          22,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          36,
+          null,
+          null,
+          36,
+          36,
+          null,
+          null,
+          36,
+          36,
+          null,
+          null,
+          31,
+          31,
+          31,
+          31,
+          null,
+          31,
+          null,
+          null,
+          1,
+          72,
+          72,
+          null,
+          null,
+          72,
+          72,
+          null,
+          null,
+          1,
+          72,
+          null,
+          null,
+          72,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          72,
+          null,
+          null,
+          72,
+          288,
+          null,
+          null,
+          null,
+          1,
+          7,
+          null,
+          null,
+          7,
+          null,
+          70,
+          3,
+          null,
+          null,
+          null,
+          null,
+          1,
+          7,
+          null,
+          24,
+          null,
+          null,
+          14,
+          null,
+          null,
+          3,
+          null,
+          null,
+          6,
+          1,
+          1,
+          null,
+          null,
+          6,
+          null,
+          null,
+          1,
+          7,
+          7,
+          null,
+          7,
+          2,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          7,
+          26,
+          26,
+          26,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1743707070
+    "timestamp": 1743708339
   },
   "Cucumber Features": {
     "coverage": {
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/services/file_parser.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/services/file_parser.rb": {
         "lines": [
           null,
           null,
@@ -386,7 +607,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/sessions_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/sessions_controller.rb": {
         "lines": [
           1,
           1,
@@ -424,7 +645,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/application_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -434,7 +655,7 @@
           1,
           null,
           1,
-          250,
+          238,
           null,
           null,
           null,
@@ -446,7 +667,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/helpers/application_helper.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/application_helper.rb": {
         "lines": [
           1,
           1,
@@ -472,28 +693,28 @@
           null,
           null,
           1,
-          97,
+          90,
           null,
           null,
           1,
-          81,
+          74,
           null,
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/helpers/admin_helper.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/admin_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/helpers/blocks_helper.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/blocks_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/helpers/courses_helper.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/courses_helper.rb": {
         "lines": [
           1,
           1,
@@ -560,7 +781,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/helpers/excel_files_helper.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/excel_files_helper.rb": {
         "lines": [
           1,
           1,
@@ -570,13 +791,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/helpers/select_block_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/admin_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/admin_controller.rb": {
         "lines": [
           null,
           1,
@@ -590,7 +805,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/students_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/students_controller.rb": {
         "lines": [
           1,
           1,
@@ -598,7 +813,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/pages_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/pages_controller.rb": {
         "lines": [
           null,
           null,
@@ -616,28 +831,28 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/blocks_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/blocks_controller.rb": {
         "lines": [
           1,
           null,
-          null,
-          null,
-          1,
-          3,
-          3,
-          3,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
           null,
           null,
           1,
           2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
           1,
           1,
+          0,
+          0,
           null,
           1,
           null,
@@ -657,7 +872,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/courses_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/courses_controller.rb": {
         "lines": [
           1,
           1,
@@ -674,10 +889,10 @@
           null,
           null,
           10,
-          5,
+          35,
           1,
           null,
-          5,
+          35,
           1,
           null,
           null,
@@ -806,7 +1021,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/excel_files_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/excel_files_controller.rb": {
         "lines": [
           1,
           null,
@@ -896,21 +1111,36 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/schedules_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/schedules_controller.rb": {
         "lines": [
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           1,
           null,
+          1,
+          0,
+          0,
           null,
-          3,
+          0,
           null,
           null,
+          null,
+          1,
+          2,
+          0,
           null,
           null,
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/registrations_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/registrations_controller.rb": {
         "lines": [
           1,
           1,
@@ -935,7 +1165,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/users_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/users_controller.rb": {
         "lines": [
           1,
           1,
@@ -1001,9 +1231,30 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/select_block_controller.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/block_selections_controller.rb": {
         "lines": [
           0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
           0,
           0,
           0,
@@ -1011,7 +1262,7 @@
         ],
         "branches": {}
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/services/user_service.rb": {
+      "/home/cr400bfc5145/EA-Block-Scheduling/app/services/user_service.rb": {
         "lines": [
           null,
           0,
@@ -1074,6 +1325,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1741373151
+    "timestamp": 1743708471
   }
 }
