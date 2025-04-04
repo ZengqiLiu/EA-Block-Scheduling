@@ -87,19 +87,19 @@ Then("I should see the spreadsheet upload button") do
   expect(page).to have_content("Import From Spreadsheet")
 end
 
-# When('I upload a valid spreadsheet') do
-#   file_path = Rails.root.join('spec', 'fixtures', 'files', 'TEAC.xlsx')
-#
-#   # Attach the file to the form and submit the form
-#   attach_file('file-input', file_path)
-#   click_button 'Submit'
-# end
-#
-# Then('I should see a success message saying {string}') do |message|
-#   #expect(page).to have_content(message)An error
-#   expect(page).to have_content("No file")
-# end
-#
-# Then('the users should be created') do
-#   expect(User.count).to be > 0
-# end
+When('I upload a valid spreadsheet') do
+  file_path = Rails.root.join('spec', 'fixtures', 'files', 'TEAC.xlsx')
+
+  #attach_file('file-input', file_path, make_visible: true)
+  find('input#file-input', visible: false).set(file_path)
+
+  click_button 'Submit'
+end
+
+Then('I should see a success message saying {string}') do |message|
+  expect(page).to have_content(message, wait: 5)
+end
+
+Then('the users should be created') do
+  expect(User.count).to be > 0
+end

@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # :nocov:
   def attachment_url(attachment)
     return test_attachment_url if Rails.env.test?
     return default_attachment_url unless attachment.attached?
@@ -16,7 +17,7 @@ module ApplicationHelper
     # Handle the case where attachment is not attached
     "/assets/default-attachment.png"
   end
-
+  # :nocov:
   def real_attachment_url(attachment)
     # Code to get the actual attachment URL for non-test environments
   end

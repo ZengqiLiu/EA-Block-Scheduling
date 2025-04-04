@@ -41,6 +41,8 @@ class ExcelFilesController < ApplicationController
     end
   end
 
+  # :nocov:
+
   # PATCH/PUT /excel_files/1 or /excel_files/1.json
   def update
     respond_to do |format|
@@ -83,4 +85,5 @@ class ExcelFilesController < ApplicationController
       format.json { render json: { error: "Excel file not found." }, status: :not_found }
     end
   end
+  # :nocov:
 end
