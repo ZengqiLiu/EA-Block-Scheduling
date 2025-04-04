@@ -2,15 +2,33 @@
 
 <% content_for :title, "Excel files" %>
 
-<h1>Excel files</h1>
+<h1>Current Files</h1>
 
-<div id="excel_files">
-  <% @excel_files.each do |excel_file| %>
-    <%= render excel_file %>
-    <p>
-      <%= link_to "Show this excel file", excel_file %>
-    </p>
-  <% end %>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>File</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @excel_files.each do |excel_file| %>
+      <tr id="<%= dom_id excel_file %>">
+        <td><%= excel_file.name %></td>
+        <td>
+          <% if excel_file.file.attached? %>
+            <%= link_to excel_file.file.filename, courses_by_upload_path(excel_file.id) %>
+          <% else %>
+            No File
+          <% end %>
+        </td>
+        <td>
+          <%= link_to "Show this excel file", excel_file %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<%= link_to "New excel file", new_excel_file_path %>
+<%= link_to "Add new .xlsx file", new_excel_file_path, class: "btn btn--primary"%>

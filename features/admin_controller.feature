@@ -15,5 +15,5 @@ Feature: Admin Dashboard Access
   Scenario: User is not logged in and tries to access the dashboard
     Given I am not logged in
     When I visit the admin dashboard
-    Then I should be redirected to students dashboard
-    And I should see an alert message "You don't have access to this page."
+    Then I should be redirected to home page
+    And I should see an alert message "Login failed."

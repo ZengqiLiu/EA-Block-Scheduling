@@ -11,8 +11,8 @@ gem "omniauth-microsoft_graph"
 gem "puma", ">= 5.0" # Use the Puma web server [https://github.com/puma/puma]
 gem "rails", "~> 7.2.1" # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "roo"  # For parsing Excel files
-gem 'rubyXL'
-gem 'activerecord-import'
+gem "rubyXL"
+gem "activerecord-import"
 gem "simple_form"  # For easier form handling
 gem "sprockets-rails" # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "stimulus-rails" # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]

@@ -6,7 +6,7 @@ SimpleCov.start do
   add_filter '/app/channels/'  # Exclude channels directory
   add_filter '/app/jobs/'      # Exclude jobs directory
   add_filter '/app/mailers/'   # Exclude mailers directory
-  add_filter '/app/models/'    # Exclude models directory
+  # add_filter '/app/models/'    # Exclude models directory
   add_filter 'app/channels/application_cable/channel.rb'  # Exclude specific files
   add_filter 'app/channels/application_cable/connection.rb'
   add_filter 'app/jobs/application_job.rb'

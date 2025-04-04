@@ -42,14 +42,34 @@
     <!-- Left = 10% + 13.34% * N -->
     <!-- Top = 55 + 19 * N -->
     <!-- Height = 19 * N -->
-    <div class="class-block" data-id="1" data-name="ENGR 102" data-details="Engineering Lab I - Room 1130.02" style="top: 55px; left: 23.34%; width: 13.34%; height: 76px">
-      ENGR 102
-    </div>
+    <!-- Two Examples -->
+    <!-- <div class="class-block" data-id="1" data-name="ENGR 102" data-details="Engineering Lab I - Room 1130.02" style="top: 55px; left: 23.34%; width: 13.34%; height: 76px"> -->
+      <!-- ENGR 102 -->
+    <!-- </div> -->
 
-    <div class="class-block" data-id="2" data-name="MATH 2412" data-details="PreCalculus - Room 2218" style="top: 207px; left: 36.68%; width: 13.34%; height: 57px">
-      MATH 2412
-    </div>
+    <!-- <div class="class-block" data-id="2" data-name="MATH 2412" data-details="PreCalculus - Room 2218" style="top: 207px; left: 36.68%; width: 13.34%; height: 57px"> -->
+      <!-- MATH 2412 -->
+    <!-- </div> -->
+    
+    <% @selected_courses.each do |course| %>
+      <% intervals_from_start = ((course.start_time - start_time) / 15.minutes).to_i %>
+      <% top_position = 55 + (intervals_from_start * 19) %>
+      <% duration_intervals = ((course.end_time - course.start_time) / 15.minutes).to_i %>
+      <% height_position = 19 * duration_intervals %>
 
+      <% day_map = { "M" => 0, "T" => 1, "We" => 2, "Th" => 3, "F" => 4 } %>
+      <% first_day = course.days.start_with?("M") ? "M" : course.days[0] %>
+      <% day_index = day_map[first_day] || 0 %>
+      <% left_position = 10 + (13.34 * day_index + 1) %>
+
+      <div class="class-block"
+           data-id="<%= course.id %>"
+           data-name="<%= course.sec_name %>"
+           data-details="<%= course.details %>"
+           style="top: <%= top_position %>px; left: <%= left_position %>%; width: 13.34%; height: <%= height_position %>px">
+        <%= course.sec_name %>
+      </div>
+    <% end %>
   </div>
 
   <!-- Single Modal for displaying class details dynamically -->

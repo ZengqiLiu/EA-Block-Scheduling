@@ -1,13 +1,14 @@
 # Engineering Academy Block Schedule Generator
-## Sprint 2 MVP
+## Sprint 3 MVP
 Deployed app: https://ea-block-scheduling-68f7266eed53.herokuapp.com/                                                                                                         
 Code Climate: We are not using Code Climate as it is asking us to pay. 
 
 Instead, we are using Rubocop and Brakeman:
 
-![Rubocop_screenshot](documentation/Spring2025/Sprint2_rubocop.PNG)
+<img width="742" alt="rubocop" src="https://github.com/user-attachments/assets/36060610-227a-447f-b071-7cabe0ca035b" />
 
-![Brakeman_screenshot](documentation/Spring2025/Sprint2_brakeman.PNG)
+<img width="790" alt="brakeman_report" src="https://github.com/user-attachments/assets/a5b170f2-669d-491b-ad0e-f1fed427756b" />
+
 
 
 ## Team Work Agreement (TWA)

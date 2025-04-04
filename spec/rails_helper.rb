@@ -7,7 +7,7 @@ SimpleCov.start do
   add_filter '/app/channels/'  # Exclude channels directory
   add_filter '/app/jobs/'      # Exclude jobs directory
   add_filter '/app/mailers/'   # Exclude mailers directory
-  add_filter '/app/models/'    # Exclude models directory
+  # add_filter '/app/models/'    # Exclude models directory
   add_filter 'app/channels/application_cable/channel.rb'  # Exclude specific files
   add_filter 'app/channels/application_cable/connection.rb'
   add_filter 'app/jobs/application_job.rb'
@@ -20,8 +20,12 @@ SimpleCov.start do
     included_paths = [
       'app/models/course.rb',
       'app/models/block.rb',
+      'app/models/block_course.rb',
+      'app/models/block_selection.rb',
       'app/controllers/courses_controller.rb',
       'app/controllers/blocks_controller.rb',
+      'app/controllers/block_selections_controller.rb',
+      'app/controllers/schedules_controller.rb',
       'app/controllers/application_controller.rb'  # Keep this as it's needed for inheritance
     ]
 
@@ -34,13 +38,17 @@ SimpleCov.start do
     source_file.filename.include?('app/controllers') &&
     (source_file.filename.include?('courses_controller.rb') ||
      source_file.filename.include?('blocks_controller.rb') ||
-     source_file.filename.include?('application_controller.rb'))
+     source_file.filename.include?('application_controller.rb')) ||
+     source_file.filename.include?('schedules_controller.rb') ||
+     source_file.filename.include?('block_selections_controller.rb')
   end
 
   add_group 'Models' do |source_file|
     source_file.filename.include?('app/models') &&
     (source_file.filename.include?('course.rb') ||
-     source_file.filename.include?('block.rb'))
+     source_file.filename.include?('block.rb')) ||
+     source_file.filename.include?('block_course.rb') ||
+     source_file.filename.include?('block_selection.rb')
   end
 end
 

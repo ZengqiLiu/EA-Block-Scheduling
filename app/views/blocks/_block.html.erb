@@ -1,11 +1,16 @@
 <div class="block">
-  <h3>Block <%= block.id || index + 1 %></h3>
+  <h3 class="block-title">
+    <input type="checkbox" name="selected_blocks[]" value="<%= index + 1 %>" class="block-selector">
+    Block <%= index + 1 %>
+  </h3>
   <ul>
     <% block.courses.each do |course| %>
       <li>
         <strong><%= course.sec_name %></strong><br>
         <%= course.days %> 
         <%= course.start_time.strftime("%I:%M %p") %>-<%= course.end_time.strftime("%I:%M %p") %>
+        <!-- Hidden field for course id -->
+        <input type="hidden" name="block[courses][]" value="<%= course.id %>" class="course-id">
       </li>
     <% end %>
   </ul>

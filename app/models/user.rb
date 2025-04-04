@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :user_roles
   has_many :roles, through: :user_roles
+  has_one :block_selection, dependent: :destroy
   validates :email, presence: true
   after_initialize :set_default_role, if: :new_record?
 
