@@ -3,12 +3,6 @@ class UserService
   def self.process_users_spreadsheet(file)
     spreadsheet = Roo::Excelx.new(file.path)
     users = []
-    puts spreadsheet
-    puts spreadsheet
-    puts spreadsheet
-    puts spreadsheet.last_row
-    puts spreadsheet.last_row
-    puts spreadsheet.last_row
     # Process from row 4 to the last row
     (4..spreadsheet.last_row).each do |row|
       # columns are combined_name, student_id, major, email, active
@@ -44,9 +38,6 @@ class UserService
         uid: nil,
         provider: nil
       )
-      puts user
-      puts user
-      puts user
       users << user
     end
 

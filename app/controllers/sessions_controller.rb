@@ -14,15 +14,18 @@ class SessionsController < ApplicationController
   # GET /auth/google_oauth2/callback
   def omniauth
     auth = request.env["omniauth.auth"]
-    @user = User.find_or_create_by(uid: auth["uid"], provider: auth["provider"]) do |u|
-      u.email = auth["info"]["email"]
-      names = auth["info"]["name"].split
-      u.first_name = names[0]
-      u.last_name = names[1..].join(" ")
-    end
+    email = auth["info"]["email"]
 
-    if @user.valid?
+    # Look up the user by email instead of creating a new one.
+    @user = User.find_by(email: email)
+
+    if @user
+      # update the user's uid
+      @user.update(uid: auth["uid"], provider: auth["provider"])
       session[:user_id] = @user.id
+
+      Rails.logger.info "Successful login for #{@user.email} via OmniAuth."
+
       # Redirect based on user role
       if current_user_admin?
         redirect_to admin_dashboard_path
@@ -30,7 +33,8 @@ class SessionsController < ApplicationController
         redirect_to students_dashboard_path
       end
     else
-      redirect_to root_path, alert: "Login failed."
+      Rails.logger.warn "Unauthorized login attempt with email #{email}."
+      redirect_to root_path, alert: "Login failed. Your email address: #{email} is not authorized to access this application."
     end
   end
 end

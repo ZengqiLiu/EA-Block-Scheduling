@@ -88,6 +88,7 @@ RSpec.configure do |config|
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]
+  system('bin/webpack-dev-server &') if Rails.env.test?
   config.include FactoryBot::Syntax::Methods
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -147,7 +148,16 @@ end
 
 OmniAuth.config.test_mode = true
 Capybara.default_driver = :rack_test
+Capybara.javascript_driver = :selenium_chrome
 
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')
+  options.add_argument('--disable-gpu')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
 
 OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
   provider: 'google_oauth2',

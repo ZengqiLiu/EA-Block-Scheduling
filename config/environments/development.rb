@@ -2,6 +2,9 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Configure 'rails notes' to inspect Cucumber files
+  config.assets.debug = true  # Ensure assets are served
+  config.assets.compile = true  # Allow assets to be compiled on demand
+  config.assets.check_precompiled_asset = false  # Avoid unnecessary checks
   config.annotations.register_directories("features")
   config.annotations.register_extensions("feature") { |tag| /#\s*(#{tag}):?\s*(.*)$/ }
 
@@ -71,7 +74,7 @@ Rails.application.configure do
   config.assets.compile = true
 
   # Suppress logger output for asset requests.
-  config.assets.quiet = true
+  #config.assets.quiet = true
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

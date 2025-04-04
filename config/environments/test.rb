@@ -6,6 +6,16 @@ require "active_support/core_ext/integer/time"
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
+  config.assets.compile = true  # Allow assets to be compiled on demand
+  config.assets.check_precompiled_asset = false  # Avoid unnecessary checks
+  config.public_file_server.enabled = true
+  config.assets.debug = false  # Set to false to prevent unexpected asset reloading
+  config.public_file_server.headers = {
+    'Cache-Control' => 'public, max-age=3600'
+  }
+
+
+
   # Configure 'rails notes' to inspect Cucumber files
   config.annotations.register_directories("features")
   config.annotations.register_extensions("feature") { |tag| /#\s*(#{tag}):?\s*(.*)$/ }
@@ -25,8 +35,6 @@ Rails.application.configure do
   # loading is working properly before deploying your code.
   config.eager_load = ENV["CI"].present?
 
-  # Configure public file server for tests with Cache-Control for performance.
-  config.public_file_server.headers = { "Cache-Control" => "public, max-age=#{1.hour.to_i}" }
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local = true
