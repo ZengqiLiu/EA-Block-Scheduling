@@ -1,8 +1,5 @@
 <%= form_with(model: course) do |form| %>
-  <% Rails.logger.debug "\n========== DEBUG Form Fields ==========" %>
-  <% Rails.logger.debug page.body %>
-  <% puts page.html %>
-  <% Rails.logger.debug "=====================================" %>
+
 
   <% if course.errors.any? %>
     <div style="color: red">

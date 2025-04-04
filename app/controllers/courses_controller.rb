@@ -7,6 +7,9 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     @courses = Course.all.order(:sec_name)
+    @excel_files = ExcelFile.all
+    #@course = Course.new 
+    @excel_file = ExcelFile.new
     @prerequisites = {}
     @corequisites = {}
     @categories = {}

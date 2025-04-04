@@ -1,0 +1,5 @@
+<%= simple_form_for @excel_file, url: excel_files_path, method: :post do |f| %>
+  <%= f.input :name %>
+  <%= f.input :file, as: :file %>
+  <%= submit_tag "Create Excel file", :class => "btn btn-primary" %>
+<% end %>

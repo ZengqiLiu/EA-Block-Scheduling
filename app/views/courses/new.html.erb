@@ -2,58 +2,6 @@
 
 <h1>New Course</h1>
 
-<%= form_with(model: @course, local: true) do |form| %>
-  <div>
-    <%= form.label :short_title %>
-    <%= form.text_field :short_title %>
-  </div>
-
-  <div>
-    <%= form.label :term %>
-    <%= form.text_field :term %>
-  </div>
-
-  <div>
-    <%= form.label :dept_code %>
-    <%= form.text_field :dept_code %>
-  </div>
-
-  <div>
-    <%= form.label :sec_name %>
-    <%= form.text_field :sec_name %>
-  </div>
-
-  <div>
-    <%= form.label :days %>
-    <%= form.text_field :days %>
-  </div>
-
-  <div>
-    <%= form.label :start_time %>
-    <%= form.text_field :start_time %>
-  </div>
-
-  <div>
-    <%= form.label :end_time %>
-    <%= form.text_field :end_time %>
-  </div>
-
-  <div>
-    <%= form.label :prerequisites %>
-    <%= form.text_field :prerequisites, placeholder: "e.g., MATH-2413, PHYS-2425" %>
-  </div>
-
-  <div>
-    <%= form.label :corequisites %>
-    <%= form.text_field :corequisites, placeholder: "e.g., PHYS-2426" %>
-  </div>
-
-  <div>
-    <%= form.label :category %>
-    <%= form.text_field :category %>
-  </div>
-
-  <%= form.submit "Create Course" %>
-<% end %>
+<%= render "course_form", course: @course %>
 
 <%= link_to "Back to courses", courses_path %>

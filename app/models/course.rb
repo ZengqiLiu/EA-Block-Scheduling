@@ -1,10 +1,14 @@
 class Course < ApplicationRecord
+  before_validation :normalize_fields
   validates :prerequisites, format: {
     with: /\A(?:|(?:[A-Z]{2,4}(?:[ -])\d{3,4}(?:-(?:\d{1,3}))?(?:,\s*[A-Z]{2,4}(?:[ -])\d{3,4}(?:-(?:\d{1,3}))?)*?))\z/,
     message: "must be a comma-separated list of course codes"
   }, allow_nil: true
 
   validates :sec_name, presence: true
+
+  validates :sec_name, uniqueness: { scope: [:term, :syn],
+    message: "course with this term, department, and syn already exists" }
 
   def get_prerequisites
     return [] if prerequisites.blank?
@@ -27,5 +31,13 @@ class Course < ApplicationRecord
     get_prerequisites.all? do |prereq|
       completed_courses.any? { |course| course.base_course_code == prereq.split("-")[0..1].join("-") }
     end
+  end
+
+  private
+
+  def normalize_fields
+    self.sec_name = sec_name.strip if sec_name.present?
+    self.term = term.strip if term.present?
+    self.syn = syn.strip if syn.present?
   end
 end
