@@ -15,9 +15,9 @@ RSpec.describe SchedulesController, type: :controller do
     # end
 
     # it "assigns courses instance variable" do
-      # get :generate_schedule
-      # expect(assigns(:courses)).not_to be_nil
-      # expect(assigns(:courses).size).to eq(3)
+    # get :generate_schedule
+    # expect(assigns(:courses)).not_to be_nil
+    # expect(assigns(:courses).size).to eq(3)
     #  end
   # end
 

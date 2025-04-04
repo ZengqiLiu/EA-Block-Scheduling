@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/application_controller.rb": {
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -53,7 +53,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/blocks_controller.rb": {
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/blocks_controller.rb": {
         "lines": [
           1,
           null,
@@ -94,7 +94,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/courses_controller.rb": {
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/courses_controller.rb": {
         "lines": [
           1,
           1,
@@ -791,7 +791,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/admin_controller.rb": {
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/admin_controller.rb": {
         "lines": [
           null,
           1,
@@ -1226,7 +1226,6 @@
           null,
           null,
           1,
-          null,
           0,
           0,
           0,
@@ -1261,7 +1260,37 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/services/user_service.rb": {
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/block_selection_controller.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {}
+      },
+      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/services/user_service.rb": {
         "lines": [
           null,
           0,

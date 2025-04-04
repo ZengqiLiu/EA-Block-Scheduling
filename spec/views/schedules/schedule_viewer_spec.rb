@@ -7,18 +7,18 @@ RSpec.describe "schedule_viewer.html.erb", type: :view do
   end
 
   # it "displays the page title" do
-    # expect(rendered).to have_selector("h1", text: "Schedule Viewer")
+  # expect(rendered).to have_selector("h1", text: "Schedule Viewer")
   # end
 
   # it "displays table headers for each day of the week" do
-    # ["Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].each do |day|
-    #   expect(rendered).to have_selector("th", text: day)
-    # end
+  # ["Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].each do |day|
+  #   expect(rendered).to have_selector("th", text: day)
+  # end
   # end
 
   # it "displays the modal for class details" do
-    # expect(rendered).to have_selector("#classModal.class-modal")
-    # expect(rendered).to have_selector(".modal-content")
+  # expect(rendered).to have_selector("#classModal.class-modal")
+  # expect(rendered).to have_selector(".modal-content")
   # end
 
   # it "has a close button in the modal" do
@@ -30,6 +30,6 @@ RSpec.describe "schedule_viewer.html.erb", type: :view do
   #     expect(rendered).to have_selector(".class-block", minimum: 1)
   #   end
 
-    # TODO: Add setup for specific class block data and test for presence
+  # TODO: Add setup for specific class block data and test for presence
   # end
 end
