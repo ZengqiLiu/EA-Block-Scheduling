@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_26_024814) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_04_135934) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -95,6 +95,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_26_024814) do
     t.integer "as_id"
     t.string "corequisites"
     t.string "category"
+    t.index ["term", "syn"], name: "index_courses_on_unique_fields", unique: true
   end
 
   create_table "excel_files", force: :cascade do |t|

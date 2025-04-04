@@ -2,6 +2,11 @@
 
 <%= render @course %>
 
+<p>
+  <strong>Prerequisites:</strong>
+  <%= get_prerequisite_names(@course.prerequisites) %>
+</p>
+
 <div>
   <%= link_to "Edit this course", edit_course_path(@course) %> |
   <%= link_to "Back to courses", courses_path %>
@@ -9,7 +14,4 @@
   <%= button_to "Destroy this course", @course, method: :delete %>
 </div>
 
-<p>
-  <strong>Prerequisites:</strong>
-  <%= get_prerequisite_names(@course.prerequisites) %>
-</p>
+
