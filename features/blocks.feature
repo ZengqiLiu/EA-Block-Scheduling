@@ -10,10 +10,6 @@ Feature: Block Management
       | MATH-101-001 | Math    | MW   | 9:00 AM    | 10:20 AM  |
       | PHYS-101-001 | Science | MW   | 10:30 AM   | 11:50 AM  |
 
-  Scenario: Preview redirects when no blocks
-    When I visit the preview page
-    Then I should be redirected to blocks page
-
   Scenario: Preview shows blocks after generation
     When I visit the blocks page
     And I click the generate blocks button

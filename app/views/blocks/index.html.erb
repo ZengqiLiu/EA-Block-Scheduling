@@ -2,38 +2,38 @@
   <h1>COURSE BLOCKS</h1>
 
   <div class="action-buttons">
-    <%= button_to "GENERATE NEW BLOCKS", 
-                  generate_blocks_path, 
+    <!-- Button for generating new blocks -->
+    <%= form_with url: generate_blocks_path,
                   method: :post,
-                  class: "btn btn--primary" %>
-                  
+                  local: true do %>
+      <%= submit_tag "GENERATE NEW BLOCKS", class: "btn btn--primary" %>
+    <% end %>
+     
+    <!-- Button for exporting blocks to Excel -->
     <%= link_to "EXPORT TO EXCEL", 
                 export_blocks_path(format: :xlsx), 
                 class: "btn btn--primary" %>
           
-    <%= button_to "SELECT BLOCK", 
-                  block_selection_path,
-                  id: "select-block-button",
-                  method: :post,
-                  form: { id: "block-selection-form" },
-                  class: "btn btn--primary" %>
+    <!-- Button for selecting a block -->
+    <%= form_with url: block_selections_path, 
+                  method: :post, 
+                  local: true, 
+                  html: { id: "block-selection-form" } do %>
+      <div class="blocks-container">
+        <% if @generated_blocks&.any? %>
+          <% @generated_blocks.each_with_index do |block, index| %>
+            <%= render partial: "block", locals: { block: block, index: index } %>
+          <% end %>
+        <% else %>
+          <p>No blocks available to display</p>
+        <% end %>
+      </div>
+      <%= submit_tag "SELECT BLOCK", class: "btn btn--primary" %>
+    <% end %>
   </div>
 
   <% if notice %>
     <div class="notice"><%= notice %></div>
-  <% end %>
-
-  <!-- Wrap the blocks container in a form -->
-  <%= form_with url: block_selection_path, method: :post, local: true do %>
-    <div class="blocks-container">
-      <% if @generated_blocks&.any? %>
-        <% @generated_blocks.each_with_index do |block, index| %>
-          <%= render partial: "block", locals: { block: block, index: index } %>
-        <% end %>
-      <% else %>
-        <p>No blocks available to display</p>
-      <% end %>
-    </div>
   <% end %>
   
   <!-- Hidden Modal overlay for successful selection -->
@@ -49,7 +49,7 @@
                   id: "modal-select-again",
                   class: "btn btn--primary" %>
       <%= button_to "BACK TO MY SCHEDULE", 
-                  "/schedule_viewer", 
+                  schedule_viewer_path, 
                   method: :get, 
                   id: "modal-back-to-schedule", 
                   class: "btn btn--primary" %>
