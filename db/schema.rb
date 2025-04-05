@@ -95,7 +95,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_04_135934) do
     t.integer "as_id"
     t.string "corequisites"
     t.string "category"
-    t.index ["term", "syn"], name: "index_courses_on_unique_fields", unique: true
+    t.index ["term", "dept_code", "syn", "sec_name"], name: "index_courses_on_unique_fields", unique: true
   end
 
   create_table "excel_files", force: :cascade do |t|

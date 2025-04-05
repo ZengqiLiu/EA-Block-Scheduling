@@ -498,7 +498,7 @@
   },
   "Cucumber Features": {
     "coverage": {
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/services/file_parser.rb": {
+      "C:/EA-Block-Scheduling/app/services/file_parser.rb": {
         "lines": [
           null,
           null,
@@ -607,7 +607,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/sessions_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/sessions_controller.rb": {
         "lines": [
           1,
           1,
@@ -624,28 +624,34 @@
           null,
           null,
           1,
+          33,
+          33,
+          null,
+          null,
+          33,
+          null,
+          33,
+          null,
           32,
+          32,
+          null,
           32,
           null,
           null,
           32,
-          null,
-          32,
-          31,
-          null,
-          31,
-          22,
+          23,
           null,
           9,
           null,
           null,
           1,
+          1,
           null,
           null,
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/application_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -655,66 +661,67 @@
           1,
           null,
           1,
-          249,
+          248,
           null,
           null,
           null,
           1,
-          36,
+          39,
           4,
           null,
           null,
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/application_helper.rb": {
+      "C:/EA-Block-Scheduling/app/helpers/application_helper.rb": {
         "lines": [
           1,
-          1,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          1,
           null,
           1,
           0,
-          null,
-          null,
-          1,
+          0,
           null,
           0,
           null,
           null,
           1,
           null,
+          1,
+          0,
           null,
           null,
           1,
-          95,
+          null,
+          0,
           null,
           null,
           1,
-          79,
+          null,
+          null,
+          null,
+          1,
+          93,
+          null,
+          null,
+          1,
+          76,
           null,
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/admin_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/blocks_helper.rb": {
+      "C:/EA-Block-Scheduling/app/helpers/admin_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/courses_helper.rb": {
+      "C:/EA-Block-Scheduling/app/helpers/blocks_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "C:/EA-Block-Scheduling/app/helpers/courses_helper.rb": {
         "lines": [
           1,
           1,
@@ -781,7 +788,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/helpers/excel_files_helper.rb": {
+      "C:/EA-Block-Scheduling/app/helpers/excel_files_helper.rb": {
         "lines": [
           1,
           1,
@@ -791,7 +798,7 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/admin_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/admin_controller.rb": {
         "lines": [
           null,
           1,
@@ -805,7 +812,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/students_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/students_controller.rb": {
         "lines": [
           1,
           1,
@@ -813,7 +820,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/pages_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/pages_controller.rb": {
         "lines": [
           null,
           null,
@@ -831,7 +838,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/blocks_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/blocks_controller.rb": {
         "lines": [
           1,
           null,
@@ -872,7 +879,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/block_selections_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/block_selections_controller.rb": {
         "lines": [
           1,
           1,
@@ -902,7 +909,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/courses_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/courses_controller.rb": {
         "lines": [
           1,
           1,
@@ -912,18 +919,21 @@
           null,
           null,
           1,
-          10,
-          10,
-          10,
-          10,
+          7,
+          7,
+          null,
+          7,
+          7,
+          7,
+          7,
           null,
           null,
-          10,
-          35,
-          1,
+          7,
+          23,
+          0,
           null,
-          35,
-          1,
+          23,
+          0,
           null,
           null,
           null,
@@ -935,19 +945,8 @@
           null,
           null,
           1,
-          3,
-          null,
-          3,
-          3,
-          3,
-          null,
-          0,
           0,
           null,
-          null,
-          null,
-          null,
-          1,
           0,
           0,
           0,
@@ -959,6 +958,17 @@
           null,
           null,
           1,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
           1,
           1,
           1,
@@ -966,7 +976,7 @@
           null,
           null,
           1,
-          3,
+          0,
           null,
           null,
           null,
@@ -974,32 +984,6 @@
           1,
           1,
           1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           null,
@@ -1010,12 +994,38 @@
           null,
           null,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
           1,
           null,
           null,
           null,
           1,
-          3,
+          0,
           null,
           null,
           null,
@@ -1051,7 +1061,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/excel_files_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/excel_files_controller.rb": {
         "lines": [
           1,
           null,
@@ -1097,6 +1107,8 @@
           null,
           null,
           null,
+          null,
+          null,
           1,
           0,
           0,
@@ -1138,10 +1150,11 @@
           1,
           null,
           null,
+          null,
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/schedules_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/schedules_controller.rb": {
         "lines": [
           1,
           null,
@@ -1170,7 +1183,7 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/registrations_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/registrations_controller.rb": {
         "lines": [
           1,
           1,
@@ -1195,14 +1208,14 @@
           null
         ]
       },
-      "/home/cr400bfc5145/EA-Block-Scheduling/app/controllers/users_controller.rb": {
+      "C:/EA-Block-Scheduling/app/controllers/users_controller.rb": {
         "lines": [
           1,
           1,
           1,
           null,
           1,
-          3,
+          5,
           null,
           null,
           1,
@@ -1226,14 +1239,14 @@
           null,
           null,
           1,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
           null,
           null,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
           null,
           0,
           0,
@@ -1260,99 +1273,59 @@
           null
         ]
       },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/controllers/block_selection_controller.rb": {
-        "lines": [
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/Users/saipatibandla/Desktop/dev/EA-Block-Scheduling/app/services/user_service.rb": {
+      "C:/EA-Block-Scheduling/app/services/user_service.rb": {
         "lines": [
           null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
+          1,
           null,
-          0,
+          1,
           null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
-          0,
+          1,
           null,
           null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
+          1,
+          null,
           0,
           0,
           null,
           null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
           null,
           0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {}
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1743795235
+    "timestamp": 1743827231
   }
 }
