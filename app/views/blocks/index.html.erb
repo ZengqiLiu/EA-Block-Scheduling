@@ -1,12 +1,16 @@
 <div data-controller="blocks" class="container">
   <h1>COURSE BLOCKS</h1>
 
+  <% if notice %>
+    <div class="notice"><%= notice %></div>
+  <% end %>
+
   <div class="action-buttons">
     <!-- Button for generating new blocks -->
     <%= form_with url: generate_blocks_path,
                   method: :post,
                   local: true do %>
-      <%= submit_tag "GENERATE NEW BLOCKS", class: "btn btn--primary" %>
+      <%= button_tag "GENERATE NEW BLOCKS", type: "submit", class: "btn btn--primary" %>
     <% end %>
      
     <!-- Button for exporting blocks to Excel -->
@@ -19,22 +23,21 @@
                   method: :post, 
                   local: true, 
                   html: { id: "block-selection-form" } do %>
-      <div class="blocks-container">
-        <% if @generated_blocks&.any? %>
-          <% @generated_blocks.each_with_index do |block, index| %>
-            <%= render partial: "block", locals: { block: block, index: index } %>
-          <% end %>
-        <% else %>
-          <p>No blocks available to display</p>
-        <% end %>
-      </div>
-      <%= submit_tag "SELECT BLOCK", class: "btn btn--primary" %>
+      <%= button_tag "SELECT BLOCK", type: "submit", class: "btn btn--primary" %>
     <% end %>
   </div>
 
-  <% if notice %>
-    <div class="notice"><%= notice %></div>
-  <% end %>
+
+  <div class="blocks-container">
+    <% if @generated_blocks&.any? %>
+      <% @generated_blocks.each_with_index do |block, index| %>
+        <%= render partial: "block", locals: { block: block, index: index } %>
+      <% end %>
+    <% else %>
+      <p>No blocks available to display</p>
+    <% end %>
+  </div>
+
   
   <!-- Hidden Modal overlay for successful selection -->
   <div id="modal-overlay" style="display: none;"></div>
@@ -57,3 +60,5 @@
   </div>
 
 </div>
+
+
