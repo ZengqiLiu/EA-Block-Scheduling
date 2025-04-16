@@ -188,7 +188,8 @@
 }
 
 .inline-form,
-.inline-link {
+.inline-link,
+.inline-select-block {
   display: inline-block;
 }
 
