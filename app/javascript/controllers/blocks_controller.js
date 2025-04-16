@@ -49,40 +49,54 @@ export default class extends Controller {
 
     selectBlockButton.addEventListener('click', (event) => {
       event.preventDefault();
-      const selectedBlocks = [];
+      const selectedIds = [];
       checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
-          const blockEl = checkbox.closest('.block');
-          selectedBlocks.push(blockEl);
+          selectedIds.push(checkbox.value);
         }
       });
     
-      if (selectedBlocks.length > 0) {
-        let message;
-        if (selectedBlocks.length === 1) {
-          const blockCount = selectedBlocks[0].querySelector('input[type="checkbox"]').value;
-          message = `You have successfully selected <strong>Block ${blockCount}</strong>.`;
-        } else {
-          const blockNumbers = Array.from(selectedBlocks).map(block => 
-            block.querySelector('input[type="checkbox"]').value
-          );
-          message = `You have successfully selected <strong>Blocks ${blockNumbers.join(', ')}</strong>.`;
-        }
-        modalMessage.innerHTML = message;
-        modalBlockContent.innerHTML = "";
-    
-        selectedBlocks.forEach(blockEl => {
-          const clone = blockEl.cloneNode(true);
-          const header = clone.querySelector('.block-title');
-          if (header) { header.remove(); }
-          modalBlockContent.appendChild(clone);
-        });
-  
-        modal.style.display = 'block';
-        modalOverlay.style.display = 'block';
+      if (selectedIds.length === 0) {
+        alert('No block was selected. Please select a block.')
+        return
+      } else if (selectedIds.length > 1) {
+        alert('Please only select one block.')
+        return
       }
-    });
-    
+
+      const form = document.getElementById('block-selection-form')
+      const formData = new FormData(form)
+
+      const token = document.querySelector('meta[name="csrf-token"]').content
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'X-CSRF-Token': token,
+          'Accept': 'application/json'
+        },
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) { throw new Error("Network response was not ok") }
+        return response.json()
+      })
+      .then(data => {
+        modalMessage.innerHTML = data.message
+        modalBlockContent.innerHTML = ""
+        const selectedBlock = document.querySelector('.block input[type="checkbox"]:checked').closest('.block')
+        if (selectedBlock) {
+          const clone = selectedBlock.cloneNode(true)
+          modalBlockContent.appendChild(clone)
+        }
+        modal.style.display = 'block'
+        modalOverlay.style.display = 'block'
+      })
+      .catch(error => {
+        console.error("Error submitting block selection:", error)
+        alert("There was an error submitting your selection. Please try again.")
+      })
+    })
 
     modalSelectAgain.addEventListener('click', () => {
       modal.style.display = 'none'

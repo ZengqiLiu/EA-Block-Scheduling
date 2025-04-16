@@ -23,13 +23,24 @@ class BlockSelectionsController < ApplicationController
 
     block_instance = Block.new(courses_for_selected)
 
-    if block_instance.valid?
-      current_user.create_block_selection!(course_ids: block_instance.courses.map(&:id))
-      flash[:notice] = "Block successfully selected."
-      redirect_back fallback_location: blocks_path
+    if request.format.json?
+      # Handle AJAX requests
+      if block_instance.valid?
+        current_user.create_block_selection!(course_ids: block_instance.courses.map(&:id))
+        render json: { message: "Block successfully selected." }, status: :ok
+      else
+        render json: { message: "Invalid block selection." }, status: :unprocessable_entity
+      end
     else
-      flash[:alert] = "Invalid block"
-      redirect_back fallback_location: blocks_path
+      # Handle non-AJAX requests
+      if block_instance.valid?
+        current_user.create_block_selection!(course_ids: block_instance.courses.map(&:id))
+        flash[:notice] = "Block successfully selected."
+        redirect_back fallback_location: blocks_path
+      else
+        flash[:alert] = "Invalid block"
+        redirect_back fallback_location: blocks_path
+      end
     end
   end
 
