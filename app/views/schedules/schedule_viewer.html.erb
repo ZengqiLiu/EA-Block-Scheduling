@@ -21,25 +21,24 @@
         </tr>
       </thead>
       <tbody>
-        <% start_time = Time.parse("08:00 AM") %>
-        <% end_time = Time.parse("09:00 PM") %>
+        <% initial_time = Time.parse("2000-01-01 08:00 AM UTC") %>
+        <% current_time = initial_time.dup %>
+        <% end_time = Time.parse("2000-01-01 09:00 PM UTC") %>
 
-        <% while start_time <= end_time %>
+        <% while current_time <= end_time %>
           <tr>
-            <td class="time-slot"><%= start_time.strftime("%I:%M %p") %></td>
-            
+            <td class="time-slot"><%= current_time.strftime("%I:%M %p") %></td>
             <% %w[Monday Tuesday Wednesday Thursday Friday].each do |day| %>
               <td></td>
             <% end %>
-
           </tr>
-          <% start_time += 15.minutes %>
+          <% current_time += 15.minutes %>
         <% end %>
       </tbody>
     </table>
 
     <!-- Absolute-positioned class block, spanning Monday and Tuesday -->
-    <!-- Left = 10% + 13.34% * N -->
+    <!-- Left = 9% + 13.34% * N -->
     <!-- Top = 55 + 19 * N -->
     <!-- Height = 19 * N -->
     <!-- Two Examples -->
@@ -52,22 +51,23 @@
     <!-- </div> -->
     
     <% @selected_courses.each do |course| %>
-      <% intervals_from_start = ((course.start_time - start_time) / 15.minutes).to_i %>
+      <% intervals_from_start = ((course.start_time - initial_time) / 15.minutes).to_i %>
       <% top_position = 55 + (intervals_from_start * 19) %>
       <% duration_intervals = ((course.end_time - course.start_time) / 15.minutes).to_i %>
       <% height_position = 19 * duration_intervals %>
 
-      <% day_map = { "M" => 0, "T" => 1, "We" => 2, "Th" => 3, "F" => 4 } %>
+      <% day_map = { "M" => 1, "T" => 2, "W" => 3, "Th" => 4, "F" => 5 } %>
       <% first_day = course.days.start_with?("M") ? "M" : course.days[0] %>
       <% day_index = day_map[first_day] || 0 %>
-      <% left_position = 10 + (13.34 * day_index + 1) %>
+      <% left_position = 9 + (13.34 * day_index + 1) %>
 
       <div class="class-block"
            data-id="<%= course.id %>"
            data-name="<%= course.sec_name %>"
-           data-details="<%= course.details %>"
+           data-details="<%= course.short_title %>"
            style="top: <%= top_position %>px; left: <%= left_position %>%; width: 13.34%; height: <%= height_position %>px">
         <%= course.sec_name %>
+
       </div>
     <% end %>
   </div>

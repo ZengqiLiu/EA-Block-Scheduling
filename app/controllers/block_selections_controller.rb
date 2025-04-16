@@ -2,7 +2,6 @@ class BlockSelectionsController < ApplicationController
   before_action :ensure_student
 
   def create
-    Rails.logger.info "Params: #{params[:block].inspect}"
     selected_ids = params.dig(:block, :selected_block_ids)
     if selected_ids.blank?
       flash[:alert] = "No block was selected. Please select a block."
