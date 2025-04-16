@@ -1,9 +1,10 @@
 class Block
   include ActiveModel::Validations
 
-  attr_accessor :courses
+  attr_accessor :courses, :id
 
-  def initialize(courses = [])
+  def initialize(courses = [], id = nil)
+    @id = id || SecureRandom.uuid
     @courses = courses.map { |c| c.is_a?(Course) ? c : Course.find(c) }
   end
 

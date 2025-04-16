@@ -187,6 +187,11 @@
   align-items: center;
 }
 
+.inline-form,
+.inline-link {
+  display: inline-block;
+}
+
 .btn--primary {
   display: inline-block;
   width: 200px;
