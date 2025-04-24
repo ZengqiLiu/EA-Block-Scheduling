@@ -9,11 +9,11 @@ class Block
   end
 
   # Validations
-  validates_length_of :courses, is: 4, message: "must have exactly 4 courses"
+  # validates_length_of :courses, is: 3, message: "must have exactly 4 courses"
   validate :no_time_conflicts
-  validate :has_required_category
+  # validate :has_required_category
   validate :no_duplicate_course_numbers
-  validate :no_prerequisites_in_block
+  # validate :no_prerequisites_in_block
 
   # Add this method to help with creation
   def self.create_with_courses(courses)
@@ -26,14 +26,14 @@ class Block
     valid_blocks = []
     return valid_blocks if courses.blank?
 
-    all_courses = Course.all.to_a
-    unique_courses = all_courses.uniq { |course| course.base_course_code }
+    # all_courses = Course.all.to_a
+    unique_courses = courses.uniq { |course| course.base_course_code }
 
-    Rails.logger.info "Found #{all_courses.length} total courses"
-    Rails.logger.info "Found #{unique_courses.length} unique base courses"
+    # Rails.logger.info "Found #{all_courses.length} total courses"
+    Rails.logger.info "Found #{unique_courses.length} matching unique base courses"
 
     # Simplified combination check
-    unique_courses.combination(4).each do |course_combo|
+    courses.combination(unique_courses.length).each do |course_combo|
       add_valid_block(valid_blocks, course_combo)
     end
 
@@ -45,7 +45,14 @@ class Block
 
   def self.add_valid_block(valid_blocks, course_combo)
     block = new(course_combo)
+    # puts course_combo
+    # puts "*********************"
+    # puts block.courses.map(&:sec_name).join(", ")
+    # puts "*********************"
+    puts SecureRandom.uuid
     if block.valid?
+      # puts "=========================="
+      # puts "Found valid block #{valid_blocks.length + 1}: #{block.courses.map(&:sec_name).join(', ')}"
       valid_blocks << block
       Rails.logger.info "Found valid block #{valid_blocks.length}: #{block.courses.map(&:sec_name).join(', ')}" if valid_blocks.length % 10 == 0
     end

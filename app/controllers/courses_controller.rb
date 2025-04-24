@@ -1,3 +1,5 @@
+require "time"
+
 class CoursesController < ApplicationController
   include CoursesHelper
   # before_action :authenticate_user!
@@ -8,7 +10,7 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all.order(:sec_name)
     @excel_files = ExcelFile.all
-    #@course = Course.new 
+    # @course = Course.new
     @excel_file = ExcelFile.new
     @prerequisites = {}
     @corequisites = {}
@@ -61,6 +63,115 @@ class CoursesController < ApplicationController
     flash[:notice] = "Course was successfully deleted"
     redirect_to courses_path
   end
+
+  def upload_courses_by_excel
+    uploaded_file = params[:file]
+    as_id = params[:as_id] || SecureRandom.uuid
+
+    unless uploaded_file
+      flash[:alert] = "No file uploaded."
+      puts "⚠️ No file uploaded"
+      redirect_to courses_path and return
+    end
+
+    puts "📂 Uploading file: #{uploaded_file.original_filename}"
+    puts "🔗 Assigned as_id: #{as_id}"
+
+    spreadsheet = Roo::Excelx.new(uploaded_file.path)
+    sheet = spreadsheet.sheet(0)
+    headers = sheet.row(1).map { |h| h.to_s.strip.gsub("\n", " ") }
+
+    puts "📋 Headers: #{headers.inspect}"
+
+    inserted = 0
+    failed_rows = []
+
+    (2..sheet.last_row).each do |i|
+      row_data = Hash[[headers, sheet.row(i)].transpose]
+      puts "📄 Row #{i}: #{row_data.inspect}"
+
+
+      parsed_start, parsed_end = get_parsed_times(row_data["Start Time"], row_data["End Time"])
+
+      if row_data["Sec Name"]&.strip == "CHEM 1109"
+        puts "🔍 Matched CHEM 1109 @ Row #{i}: #{row_data.inspect}"
+        puts "🔍 Start Time: #{parsed_start}"
+        puts "🔍 End Time: #{parsed_end}"
+      end
+
+      if row_data["Sec Name"]&.strip == "CHEM-1109-001"
+        puts "🔍 Matched CHEM-1109-001 @ Row #{i}: #{row_data.inspect}"
+        puts "🔍 Start Time: #{parsed_start}"
+        puts "🔍 End Time: #{parsed_end}"
+      end
+
+
+      course = Course.new(
+        term: row_data["Term"],
+        dept_code: row_data["Dept Code"]&.strip,
+        course_id: row_data["Crse Id"],
+        sec_coreq_secs: row_data["Coreq Secs"],
+        syn: row_data["Syn"],
+        sec_name: row_data["Sec Name"],
+        short_title: row_data["Short Title"],
+        im: row_data["IM"],
+        building: row_data["Bldg"],
+        room: row_data["Room"],
+        days: row_data["Days"],
+        start_time: parsed_start,
+        end_time: parsed_end,
+        fac_id: row_data["Fac ID"],
+        faculty_name: row_data["Faculty Name"],
+        crs_capacity: row_data["Crs Capacity"],
+        sec_cap: row_data["Sec Cap"],
+        student_count: row_data["Student Count"],
+        notes: row_data["NOTES"],
+        prerequisites: nil,
+        corequisites: nil,
+        category: nil,
+        as_id: as_id
+      )
+
+      if course.save
+        inserted += 1
+        puts "✅ Inserted: #{course.sec_name} (row #{i})"
+      else
+        error_message = course.errors.full_messages.join(", ")
+        puts "❌ Failed row #{i}: #{error_message}"
+        failed_rows << { row: i, errors: course.errors.full_messages }
+      end
+    end
+
+    puts "📊 Upload complete. Inserted: #{inserted}, Failed: #{failed_rows.size}"
+
+    flash[:notice] = "#{inserted} courses uploaded successfully."
+    flash[:alert] = "Some rows failed to upload: #{failed_rows.inspect}" if failed_rows.any?
+    redirect_to courses_path
+  end
+
+  def parse_time_value(t)
+    return nil if t.blank?
+
+    t = t.to_s.strip
+
+    if t =~ /^\d+$/  # If it's all digits, assume it's seconds
+      seconds = t.to_i
+      Time.at(seconds).utc.strftime("%I:%M %p") # e.g., 50400 => "02:00 PM"
+    else
+      Time.parse(t).strftime("%I:%M %p") rescue t
+    end
+  end
+
+  def get_parsed_times(start_time_raw, end_time_raw)
+    start_times = start_time_raw.to_s.split(/\n+/).map { |t| parse_time_value(t) }.compact
+    end_times   = end_time_raw.to_s.split(/\n+/).map { |t| parse_time_value(t) }.compact
+
+    parsed_start = start_times.min
+    parsed_end   = end_times.max
+
+    [parsed_start, parsed_end]
+  end
+
 
   def new
     @course = Course.new

@@ -10,7 +10,13 @@ class BlocksController < ApplicationController
 
   def generate
     courses = Course.all
-    @@generated_blocks = Block.generate_blocks(courses)
+    # Filter courses whose base_course_code matches a normalized wanted code
+    normalized = params[:course_codes]
+    selected_courses_sections = courses
+      .select { |course| normalized.include?(course.base_course_code.upcase) }
+    puts "Selected course count: #{selected_courses_sections.length}"
+    puts "Selected courses: #{selected_courses_sections.map(&:sec_name).join(', ')}"
+    @@generated_blocks = Block.generate_blocks(selected_courses_sections)
     redirect_to blocks_path, notice: "Generated #{@@generated_blocks.length} blocks! Review the generated blocks."
   end
 

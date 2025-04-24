@@ -18,12 +18,15 @@ Rails.application.routes.draw do
   post "register", to: "registrations#create"
   get "schedule_viewer", to: "schedules#schedule_viewer"
   # Course and schedule routes
+  post "courses/upload_courses_by_excel", to: "courses#upload_courses_by_excel", as: "upload_courses_by_excel"
   resources :courses
   resources :schedules, only: [:index, :show] do
     collection do
       get "generate_schedule", to: "schedules#generate_schedule", as: :generate_schedule
     end
   end
+
+
 
   # User and session routes
   # User and session routes
@@ -52,10 +55,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  get "/blocks/generate", to: "blocks#generate", as: "generate_blocks"
 
   resources :blocks do
     collection do
-      post :generate
       get :preview
       post :save
       get :export

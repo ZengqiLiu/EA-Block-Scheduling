@@ -28,27 +28,39 @@ module CoursesHelper
   end
 
   # Define prereqs and coreqs for listed courses for populating columns during creation
+
   def corequisites
     {
-      "ENGR-102" => %w[MATH-2412 MATH-2413],
-      "ENGR-216" => ["PHYS-2425"],
-      "ENGR-217" => ["PHYS-2426"]
+      "ENGR-216"  => ["PHYS-2425"],
+      "ENGR-217"  => ["PHYS-2426"],
+      "PHYS-2425" => ["MATH-2414"],
+      "PHYS-2426" => ["MATH-2415"]
     }
   end
+
+
   def prerequisites
     {
-      "MATH-2413" => ["MATH-2412"],
-      "MATH-2414" => ["MATH-2413"],
-      "MATH-2415" => ["MATH-2414"],
-      "MATH-2420" => ["MATH-2415"],
-      "ENGR-216" => %w[ENGR-102 MATH-2413],
-      "ENGR-217" => %w[ENGR-216 PHYS-2425 MATH-2414],
-      "CHEM-1312" => ["CHEM-1309"],
-      "CHEM-1112" => ["CHEM-1309"],
-      "PHYS-2425" => ["MATH-2413"],
-      "PHYS-2426" => %w[MATH-2414 PHYS-2425]
+      "ENGR-102"    => [],
+      "CLEN-181"    => [],
+      "CLEN-261"    => [],
+      "CHEM-1309"   => [],
+      "CHEM-1109"   => [],
+      "CHEM-1311"   => [],
+      "CHEM-1111"   => [],
+      "CHEM-1312"   => ["CHEM-1311"],
+      "CHEM-1112"   => ["CHEM-1111"],
+      "MATH-2413"   => ["MATH-2412"],
+      "MATH-2414"   => ["MATH-2413"],
+      "MATH-2415"   => ["MATH-2414"],
+      "MATH-2420"   => ["MATH-2415"],
+      "ENGR-216"    => ["ENGR-102", "MATH-2413"],  # (MATH-2413 or higher)
+      "ENGR-217"    => ["ENGR-216", "PHYS-2425", "MATH-2414"], # assumes prereqs not coreqs
+      "PHYS-2425"   => ["MATH-2413"],  # co-enroll in MATH-2414 not enforced here
+      "PHYS-2426"   => ["PHYS-2425", "MATH-2414"] # assumes co-enrolled in MATH-2415
     }
   end
+
 
   # Define categories of courses based on class code
   def categories
@@ -59,5 +71,11 @@ module CoursesHelper
       "ENGR" => "Engineering",
       "CLEN" => "Intro"
     }
+  end
+
+  def distinct_courses_by_dept(dept_code)
+    Course.where("dept_code LIKE ?", "#{dept_code}%")
+          .group_by { |c| extract_base_code(c.sec_name) }
+          .map { |base, records| ["#{base} - #{records.first.short_title}", base] }
   end
 end

@@ -4,10 +4,16 @@
 <hr>
 
 <!-- Excel File Upload Form -->
-<div id="excel_upload">
-  <h2>Import from Spreadsheet</h2>
-  <%= render "excel_form", excel_file: @excel_file %>
-</div>
+<%= form_with url: upload_courses_by_excel_path, method: :post, local: true, multipart: true do |f| %>
+  <div class="form-group">
+    <%= label_tag :file, "Select Excel File (.xlsx)" %><br>
+    <%= file_field_tag :file, required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= submit_tag "Upload Courses 10", class: "btn btn-primary" %>
+  </div>
+<% end %>
 
 <hr>
 

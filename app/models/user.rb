@@ -6,6 +6,7 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
 
   def admin?
+    puts role
     role == "admin"
   end
 

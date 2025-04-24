@@ -10,40 +10,70 @@
   <div class="registration-form">
     <h1>Course Registration</h1>
 
-    <%= form_with url: register_path, method: :post do %>
-      <div>
-        <label>Year:</label>
-        <input type="radio" id="year_1" name="year" value="1" checked class="year-select">
-        <label for="year_1">Year 1</label>
-        <input type="radio" id="year_2" name="year" value="2" class="year-select">
-        <label for="year_2">Year 2</label>
-      </div>
+    <%= form_with url: register_path, method: :post, local: true do %>
+      <fieldset>
+        <legend>👨‍🎓 Courses You've Already Taken</legend>
 
-      <div>
-        <label>Math Course:</label>
-        <select name="math_course" class="math-select">
-            <option>Calculus I</option>
-            <option>Calculus II</option>
-        </select>
-      </div>
+        <div>
+          <label>Math Course Taken:</label><br>
+          <select name="math_course" class="math-select">
+            <%= options_for_select([["N/A", ""]]+distinct_courses_by_dept("MATH")) %>
+          </select>
+        </div>
 
-      <div>
-        <label>Science Course:</label>
-        <select name="science_course" class="science-select">
-            <option>Physics 1</option>
-            <option>Chemistry 1</option>
-        </select>
-      </div>
+        <div>
+          <label>Science Course Taken:</label><br>
+          <select name="science_course" class="science-select">
+            <%= options_for_select([["N/A", ""]]+distinct_courses_by_dept("PHYS") + distinct_courses_by_dept("CHEM")) %>
+          </select>
+        </div>
 
-      <div>
-        <label>Engineering Course:</label>
-        <select name="engineering_course" class="engineering-select">
-            <option>Eng 1</option>
-            <option>Eng 2</option>
-        </select>
-      </div>
+        <div>
+          <label>Engineering Course Taken:</label><br>
+          <select name="engineering_course" class="engineering-select">
+            <%= options_for_select([["N/A", ""]]+distinct_courses_by_dept("ENGR")) %>
+          </select>
+        </div>
+      </fieldset>
 
+      <br>
+
+      <fieldset>
+        <legend>📚 Courses You Want to Take</legend>
+
+        <div>
+          <label>Math Course:</label><br>
+          <select name="wanted_math_course" class="math-select">
+            <%= options_for_select(distinct_courses_by_dept("MATH")) %>
+          </select>
+        </div>
+
+        <div>
+          <label>Science Course:</label><br>
+          <select name="wanted_science_course" class="science-select">
+            <%= options_for_select(
+              distinct_courses_by_dept("PHYS") +
+              distinct_courses_by_dept("CHEM")
+            ) %>
+          </select>
+        </div>
+
+        <div>
+          <label>Engineering Course:</label><br>
+          <select name="wanted_engineering_course" class="engineering-select">
+            <%= options_for_select(distinct_courses_by_dept("ENGR")) %>
+          </select>
+        </div>
+      </fieldset>
+
+      <br>
       <button type="submit" class="btn btn-primary">Register</button>
+    <% end %>
+
+    <% if flash[:error] %>
+      <p style="color: red;"><%= flash[:error] %></p>
+    <% elsif flash[:notice] %>
+      <p style="color: green;"><%= flash[:notice] %></p>
     <% end %>
   </div>
 </body>
