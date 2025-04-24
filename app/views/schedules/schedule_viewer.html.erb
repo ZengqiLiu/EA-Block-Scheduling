@@ -51,25 +51,37 @@
     <!-- </div> -->
     
     <% @selected_courses.each do |course| %>
-      <% intervals_from_start = ((course.start_time - initial_time) / 15.minutes).to_i %>
-      <% top_position = 55 + (intervals_from_start * 19) %>
-      <% duration_intervals = ((course.end_time - course.start_time) / 15.minutes).to_i %>
-      <% height_position = 19 * duration_intervals %>
+  <% intervals_from_start = ((course.start_time - initial_time) / 15.minutes).to_i %>
+  <% top_position = 55 + (intervals_from_start * 19) %>
+  <% duration_intervals = ((course.end_time - course.start_time) / 15.minutes).to_i %>
+  <% height_position = 19 * duration_intervals %>
 
-      <% day_map = { "M" => 1, "T" => 2, "W" => 3, "Th" => 4, "F" => 5 } %>
-      <% first_day = course.days.start_with?("M") ? "M" : course.days[0] %>
-      <% day_index = day_map[first_day] || 0 %>
-      <% left_position = 9 + (13.34 * day_index + 1) %>
+  <% # Day map (handles "Th" specially to avoid confusion with "T") %>
+  <% day_map = { "M" => 1, "T" => 2, "W" => 3, "Th" => 4, "F" => 5 } %>
+  <% day_width = 13.34 %>
 
-      <div class="class-block"
-           data-id="<%= course.id %>"
-           data-name="<%= course.sec_name %>"
-           data-details="<%= course.short_title %>"
-           style="top: <%= top_position %>px; left: <%= left_position %>%; width: 13.34%; height: <%= height_position %>px">
-        <%= course.sec_name %>
+  <% days = [] %>
+  <% str = course.days.dup %>
+  <% days << "Th" if str.sub!("Th", "") %> <!-- Handle "Th" first to avoid "T" conflict -->
+  <% days << "M" if str.sub!("M", "") %>
+  <% days << "T" if str.sub!("T", "") %>
+  <% days << "W" if str.sub!("W", "") %>
+  <% days << "F" if str.sub!("F", "") %>
 
-      </div>
-    <% end %>
+  <% days.each do |d| %>
+    <% day_index = day_map[d] %>
+    <% left_position = 10 + (day_index * day_width) %>
+
+    <div class="class-block"
+        data-id="<%= course.id %>"
+        data-name="<%= course.sec_name %>"
+        data-details="<%= course.short_title %>"
+        style="top: <%= top_position %>px; left: <%= left_position %>%; width: <%= day_width %>%; height: <%= height_position %>px">
+      <%= course.sec_name %>
+    </div>
+  <% end %>
+
+<% end %>
   </div>
 
   <!-- Single Modal for displaying class details dynamically -->
