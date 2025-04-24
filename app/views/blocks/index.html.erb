@@ -6,14 +6,6 @@
   <% end %>
 
   <div class="action-buttons">
-    <div class="inline-form">
-      <!-- Button for generating new blocks -->
-      <%= form_with url: generate_blocks_path,
-                    method: :post,
-                    local: true do %>
-        <%= button_tag "GENERATE NEW BLOCKS", type: "submit", class: "btn btn--primary" %>
-      <% end %>
-    </div>
       
     <div class="inline-link">  
       <!-- Button for exporting blocks to Excel -->
