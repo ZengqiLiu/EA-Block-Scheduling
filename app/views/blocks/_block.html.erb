@@ -1,10 +1,13 @@
+<% is_block_full = block.courses.any? { |course| course.student_count.to_i >= course.sec_cap.to_i } %>
+
 <div class="block">
   <h3 class="block-title">
     <input type="checkbox"
            name="block[selected_block_ids][]"
            value=<%= block.id %>
            class="block-selector" 
-           form="block-selection-form">
+           form="block-selection-form"
+           <%= 'disabled' if is_block_full %>>
     Block <%= index + 1 %>
   </h3>
   <ul>
@@ -13,6 +16,7 @@
         <strong><%= course.sec_name %></strong><br>
         <%= course.days %> 
         <%= course.start_time.strftime("%I:%M %p") %> - <%= course.end_time.strftime("%I:%M %p") %>
+        <span>Enrolled: <%= course.student_count %> / <%= course.sec_cap %></span>
         <!-- Hidden field for course id -->
         <input type="hidden" name="block[courses][<%= block.id %>][]" value="<%= course.id %>" class="course-id" form="block-selection-form">
 

@@ -124,7 +124,7 @@ class CoursesController < ApplicationController
         faculty_name: row_data["Faculty Name"],
         crs_capacity: row_data["Crs Capacity"],
         sec_cap: row_data["Sec Cap"],
-        student_count: row_data["Student Count"],
+        student_count: 0,
         notes: row_data["NOTES"],
         prerequisites: nil,
         corequisites: nil,

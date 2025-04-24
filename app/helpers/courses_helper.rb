@@ -75,6 +75,7 @@ module CoursesHelper
 
   def distinct_courses_by_dept(dept_code)
     Course.where("dept_code LIKE ?", "#{dept_code}%")
+          .reject { |c| c.short_title =~ /\b(lb|lab)\b/i }
           .group_by { |c| extract_base_code(c.sec_name) }
           .map { |base, records| ["#{base} - #{records.first.short_title}", base] }
   end
