@@ -141,4 +141,75 @@ RSpec.describe CoursesController, type: :controller do
       expect(flash[:notice]).to match(/successfully deleted/)
     end
   end
+
+  describe "POST #upload_courses_by_excel" do
+    before(:each) do
+      Course.delete_all
+    end
+
+    let(:mock_spreadsheet) { instance_double("Roo::Excelx") }
+    let(:mock_sheet) { instance_double("Roo::Excelx::Sheet") }
+    let(:uploaded_file) do
+      temp = Tempfile.new(['sample', '.xlsx'])
+      allow(temp).to receive(:path).and_return('/fake/path/sample.xlsx')
+      Rack::Test::UploadedFile.new(temp, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    end
+
+
+    context "when no file is uploaded" do
+      it "redirects with an alert message" do
+        post :upload_courses_by_excel, params: {}
+        expect(response).to redirect_to(courses_path)
+        expect(flash[:alert]).to eq("No file uploaded.")
+      end
+    end
+
+    context "when the uploaded file is valid" do
+      before do
+        allow(Roo::Excelx).to receive(:new).and_return(mock_spreadsheet)
+        allow(mock_spreadsheet).to receive(:sheet).and_return(mock_sheet)
+
+        # Setup the sheet
+        allow(mock_sheet).to receive(:row).with(1).and_return(["Term", "Dept Code", "Crse Id", "Sec Name", "Start Time", "End Time"])
+        allow(mock_sheet).to receive(:row).with(2).and_return(["224F000", "CSCE", "121", "CSCE-121-001", "09:00 AM", "10:20 AM"])
+        allow(mock_sheet).to receive(:last_row).and_return(2)
+      end
+
+      it "creates courses and sets flash notice" do
+        expect {
+          post :upload_courses_by_excel, params: { file: uploaded_file }
+        }.to change(Course, :count).by(1)
+
+        expect(response).to redirect_to(courses_path)
+        expect(flash[:notice]).to match(/courses uploaded successfully/)
+        expect(flash[:alert]).to be_nil
+      end
+    end
+
+    context "when there are invalid rows" do
+      before do
+        allow(Roo::Excelx).to receive(:new).and_return(mock_spreadsheet)
+        allow(mock_spreadsheet).to receive(:sheet).and_return(mock_sheet)
+
+        # Header
+        allow(mock_sheet).to receive(:row).with(1).and_return(["Term", "Dept Code", "Crse Id", "Sec Name", "Start Time", "End Time"])
+        # Row 2 - Valid course
+        allow(mock_sheet).to receive(:row).with(2).and_return(["224F000", "CSCE", "121", "CSCE-121-001", "09:00 AM", "10:20 AM"])
+        # Row 3 - Invalid course (missing Sec Name)
+        allow(mock_sheet).to receive(:row).with(3).and_return(["224F000", "CSCE", "122", nil, "10:30 AM", "11:50 AM"])
+        allow(mock_sheet).to receive(:last_row).and_return(3)
+      end
+
+      it "creates only valid courses and sets flash alert for failures" do
+        expect {
+          post :upload_courses_by_excel, params: { file: uploaded_file }
+        }.to change(Course, :count).by(1)
+
+        expect(response).to redirect_to(courses_path)
+        expect(flash[:notice]).to match(/courses uploaded successfully/)
+        expect(flash[:alert]).to be_present
+        expect(flash[:alert]).to match(/Some rows failed to upload/)
+      end
+    end
+  end
 end
