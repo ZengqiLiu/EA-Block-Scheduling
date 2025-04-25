@@ -35,31 +35,33 @@
     <% end %>
   </div>
 
-  <% @standalone_courses_group.each do |base_code, courses| %>
-  <div class="standalone-group" style="padding-left: 25px;">
-    <label for="standalone-<%= base_code %>"><strong><%= base_code %></strong></label>
-    <div>
-      <%= select_tag "standalone_courses[#{base_code}]",
-          options_from_collection_for_select(
-            courses,
-            :id,
-            ->(course) {
-              time_range = "#{course.start_time.strftime("%I:%M %p")} - #{course.end_time.strftime("%I:%M %p")}"
-              room = course.room.to_s.strip
-              building = course.building.to_s.strip
-              "#{course.sec_name} (#{course.days.strip} #{time_range}#{", #{building} #{room}" if building.present? && room.present?})"
-            }
-          ),
-          include_blank: "Select Section",
-          class: "form-control",
-          form: "block-selection-form" ,
-          style: "width: 300px;"
-          %>
-    </div>
-    
+  <div style="padding-left: 25px; margin-top: 20px;">
+  <%= form_with url: save_standalone_blocks_path, method: :post, local: true, id: "standalone-form" do %>
+    <% @standalone_courses_group.each do |base_code, courses| %>
+      <div class="standalone-group">
+        <label for="standalone-<%= base_code %>"><strong><%= base_code %></strong></label>
+        <div>
+          <%= select_tag "standalone_courses[#{base_code}]",
+              options_from_collection_for_select(
+                courses,
+                :id,
+                ->(course) {
+                  time_range = "#{course.start_time.strftime("%I:%M %p")} - #{course.end_time.strftime("%I:%M %p")}"
+                  room = course.room.to_s.strip
+                  building = course.building.to_s.strip
+                  "#{course.sec_name} (#{course.days.strip} #{time_range}#{", #{building} #{room}" if building.present? && room.present?})"
+                }
+              ),
+              include_blank: "Select Section",
+              class: "form-control",
+              form: "standalone-form",
+              style: "width: 300px;" %>
+        </div>
+      </div>
+    <% end %>
+    <%= submit_tag "SAVE STANDALONE COURSES", class: "btn btn--primary", style: "margin-top: 15px;" %>
+  <% end %>
   </div>
-
-<% end %>
 
   <!-- Hidden Modal overlay for successful selection -->
   <div id="modal-overlay" style="display: none;"></div>

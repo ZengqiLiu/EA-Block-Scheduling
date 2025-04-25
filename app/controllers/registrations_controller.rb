@@ -66,7 +66,7 @@ class RegistrationsController < ApplicationController
       redirect_to generate_blocks_path(course_codes: normalized, standalone_courses: normalized_standalone)
     end
 
-    # redirect_to register_path
+    redirect_to register_path
   end
 
   private

@@ -15,21 +15,21 @@
         <legend>👨‍🎓 Courses You've Already Taken</legend>
 
         <div>
-          <label>Math Course Taken:</label><br>
+          <label>Highest Math Course Taken:</label><br>
           <select name="math_course" class="math-select">
             <%= options_for_select([["N/A", ""]]+distinct_courses_by_dept("MATH")) %>
           </select>
         </div>
 
         <div>
-          <label>Science Course Taken:</label><br>
+          <label>Highest Science Course Taken:</label><br>
           <select name="science_course" class="science-select">
             <%= options_for_select([["N/A", ""]]+distinct_courses_by_dept("PHYS") + distinct_courses_by_dept("CHEM")) %>
           </select>
         </div>
 
         <div>
-          <label>Engineering Course Taken:</label><br>
+          <label>Highest Engineering Course Taken:</label><br>
           <select name="engineering_course" class="engineering-select">
             <%= options_for_select([["N/A", ""]]+distinct_courses_by_dept("ENGR")) %>
           </select>

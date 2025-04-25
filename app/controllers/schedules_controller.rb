@@ -7,15 +7,20 @@ class SchedulesController < ApplicationController
     { name: "Operating Systems", instructor: "Prof. Emily Johnson", course_code: "CS301" }
   ]
   end
-  
+
   before_action :require_login
 
   def schedule_viewer
     if current_user.block_selection.present?
-      @selected_courses = Course.where(id: current_user.block_selection.course_ids)
+      block_course_ids = current_user.block_selection.course_ids
     else
-      @selected_courses = []
+      block_course_ids = []
     end
+
+    standalone_course_ids = StandaloneCourse.where(user_id: current_user.id).pluck(:course_id)
+
+    all_course_ids = block_course_ids + standalone_course_ids
+    @selected_courses = Course.where(id: all_course_ids)
   end
 
   def require_login

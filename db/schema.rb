@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_04_135934) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_25_031442) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -123,6 +123,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_04_135934) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "standalone_courses", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_standalone_courses_on_course_id"
+    t.index ["user_id"], name: "index_standalone_courses_on_user_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
@@ -150,4 +159,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_04_135934) do
   add_foreign_key "block_courses", "block_selections"
   add_foreign_key "block_courses", "courses"
   add_foreign_key "block_selections", "users"
+  add_foreign_key "standalone_courses", "courses"
+  add_foreign_key "standalone_courses", "users"
 end
