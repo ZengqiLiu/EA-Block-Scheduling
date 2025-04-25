@@ -26,13 +26,6 @@ class Course < ApplicationRecord
     get_prerequisites.map { |prereq| Course.find_by(sec_name: prereq) }.compact
   end
 
-  def prerequisites_met?(completed_courses)
-    return true if get_prerequisites.empty?
-    get_prerequisites.all? do |prereq|
-      completed_courses.any? { |course| course.base_course_code == prereq.split("-")[0..1].join("-") }
-    end
-  end
-
   private
 
   def normalize_fields
