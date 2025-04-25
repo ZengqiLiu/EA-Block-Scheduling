@@ -73,6 +73,10 @@ module CoursesHelper
     }
   end
 
+  def standalone_courses
+     ["CHEM-1309", "CHEM-1312", "PHYS-1401"]
+  end
+
   def distinct_courses_by_dept(dept_code)
     Course.where("dept_code LIKE ?", "#{dept_code}%")
           .reject { |c| c.short_title =~ /\b(lb|lab)\b/i }

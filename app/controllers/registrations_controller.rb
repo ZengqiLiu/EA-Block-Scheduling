@@ -59,8 +59,11 @@ class RegistrationsController < ApplicationController
     else
       flash[:notice] = "Successfully registered for: #{wanted_courses.join(', ')}"
       normalized = wanted_courses.map { |name| name.strip.upcase }
+      normalized_standalone = normalized.select { |name| standalone_courses.include?(name) }
+      normalized -= normalized_standalone
       puts "Normalized base codes: #{normalized.inspect}"
-      redirect_to generate_blocks_path(course_codes: normalized)
+      puts "Standalone base codes: #{normalized_standalone.inspect}"
+      redirect_to generate_blocks_path(course_codes: normalized, standalone_courses: normalized_standalone)
     end
 
     # redirect_to register_path

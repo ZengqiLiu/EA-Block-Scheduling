@@ -77,7 +77,8 @@
         data-name="<%= course.sec_name %>"
         data-details="<%= course.short_title %>"
         style="top: <%= top_position %>px; left: <%= left_position %>%; width: <%= day_width %>%; height: <%= height_position %>px">
-      <%= course.sec_name %>
+      <div><strong><%= course.sec_name %></strong></div>
+      <div><%= course.start_time.strftime("%I:%M %p") %> - <%= course.end_time.strftime("%I:%M %p") %></div>
     </div>
   <% end %>
 
