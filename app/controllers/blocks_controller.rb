@@ -13,8 +13,8 @@ class BlocksController < ApplicationController
   def generate
     courses = Course.all
     # Filter courses whose base_course_code matches a normalized wanted code
-    normalized = params[:course_codes]
-    normalized_standalone = params[:standalone_courses]
+    normalized = params[:course_codes] || []
+    normalized_standalone = params[:standalone_courses] || []
 
     selected_courses_sections = courses
       .select { |course| normalized.include?(course.base_course_code.upcase) }

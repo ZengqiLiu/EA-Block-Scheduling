@@ -67,7 +67,7 @@ RSpec.describe SessionsController, type: :controller do
 
         expect(session[:user_id]).to be_nil
         expect(response).to redirect_to(root_path)
-        expect(flash[:alert]).to eq("Login failed.")
+        expect(flash[:alert]).to eq("Login failed. Your email address: test@example.com is not authorized to access this application.")
       end
     end
   end

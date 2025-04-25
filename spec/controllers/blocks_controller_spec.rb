@@ -21,7 +21,7 @@ RSpec.describe BlocksController, type: :controller do
 
   describe "POST #generate" do
     it "generates new blocks and redirects to index" do
-      post :generate
+      post :generate, params: { course_codes: [], standalone_courses: [] }
       expect(response).to redirect_to(blocks_path)
       expect(flash[:notice]).to include("Generated")
     end
@@ -34,7 +34,7 @@ RSpec.describe BlocksController, type: :controller do
     end
 
     it "succeeds when blocks are generated" do
-      post :generate
+      post :generate, params: { course_codes: [], standalone_courses: [] }
       get :preview
       expect(response).to be_successful
     end

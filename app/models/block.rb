@@ -120,38 +120,6 @@ class Block
     end
   end
 
-  def has_required_category
-    required_categories = ["Science", "Math", "Engineering"]
-
-    # Check each required category
-    required_categories.each do |category|
-      # Check if any course in the block matches the required category
-      unless courses.any? { |course| course.respond_to?(:category) && course.category == category }
-        errors.add(:base, "Block must include at least one #{category} course")
-      end
-    end
-  end
-
-  def no_prerequisites_in_block
-    courses.each do |course|
-      # Skip if no prerequisites
-      next if course.prerequisites.blank?
-
-      # Get base course codes for current block
-      current_course_codes = courses.map { |c| c.base_course_code }
-
-      # Get prerequisite codes for this course
-      prereq_codes = course.get_prerequisites
-
-      # Check if any prerequisites are in the current block
-      if prereq_codes.any? { |prereq| current_course_codes.include?(prereq) }
-        errors.add(:base, "Cannot include #{course.sec_name} with its prerequisites")
-        return false
-      end
-    end
-    true
-  end
-
   def no_duplicate_course_numbers
     return unless courses.present?
     course_numbers = get_course_numbers
