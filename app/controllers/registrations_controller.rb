@@ -56,6 +56,7 @@ class RegistrationsController < ApplicationController
         errors << "corequisites: #{f[:missing_coreqs].join(', ')}" if f[:missing_coreqs].any?
         "#{f[:course]} (missing #{errors.join('; ')})"
       end.join("; ")
+      edirect_to register_path and return
     else
       flash[:notice] = "Successfully registered for: #{wanted_courses.join(', ')}"
       normalized = wanted_courses.map { |name| name.strip.upcase }
@@ -63,10 +64,8 @@ class RegistrationsController < ApplicationController
       normalized -= normalized_standalone
       puts "Normalized base codes: #{normalized.inspect}"
       puts "Standalone base codes: #{normalized_standalone.inspect}"
-      redirect_to generate_blocks_path(course_codes: normalized, standalone_courses: normalized_standalone)
+      redirect_to generate_blocks_path(course_codes: normalized, standalone_courses: normalized_standalone) and return
     end
-
-    redirect_to register_path
   end
 
   private
