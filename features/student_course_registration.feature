@@ -1,22 +1,21 @@
-Feature: Course Registration
+Feature: Student Course Registration
   As a student
-  I want to register for courses
-  So that my selections are logged and confirmed
+  I want to register for courses and have my prerequisites validated
 
-  Scenario: View Registration Form
-    Given I am on the registration page
-    Then I should see the registration form
-    And I should see "Year"
-    And I should see "Math Course"
-    And I should see "Science Course"
-    And I should see "Engineering Course"
-    And I should see the "Register" button
+  Background:
+    Given the following registration courses exist abc:
+      | dept_code | sec_name       | short_title            |
+      | MATH      | MATH-2412-001   | Pre-Calculus            |
+      | CHEM      | CHEM-1309-001   | General Chemistry I     |
+      | ENGR      | ENGR-102-001    | Introduction to Engr    |
+    And I am on the registration page abc
 
-  Scenario: Submit Registration Form
-    Given I am on the registration page
-    When I select "Year 1" for "Year"
-    And I select "Calculus I" for "Math Course"
-    And I select "Physics 1" for "Science Course"
-    And I select "Eng 1" for "Engineering Course"
-    And I click on the "Register" button
-    Then I should see "Successfully registered!"
+  Scenario: Successfully register for courses abc
+    When I select "N/A" for "Math Course" abc
+    And I select "N/A" for "Science Course" abc
+    And I select "N/A" for "Engineering Course" abc
+    And I select "MATH-2412" for "Wanted Math Course" abc
+    And I select "CHEM-1309" for "Wanted Science Course" abc
+    And I select "ENGR-102" for "Wanted Engineering Course" abc
+    And I click on the "Register" button abc
+    Then I should be redirected to the blocks page abc

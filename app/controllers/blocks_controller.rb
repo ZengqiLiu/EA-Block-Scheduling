@@ -6,7 +6,7 @@ class BlocksController < ApplicationController
     @blocks = defined?(@@generated_blocks) ? @@generated_blocks : []
     @generated_blocks = @blocks  # Keep this for backward compatibility if needed
     @standalone_courses_group = defined?(@@standalone_courses_group) ? @@standalone_courses_group : {}
-    puts "Standalone courses grouped: #{@standalone_courses_group.inspect}"
+    # puts "Standalone courses grouped: #{@standalone_courses_group.inspect}"
     render :index
   end
 

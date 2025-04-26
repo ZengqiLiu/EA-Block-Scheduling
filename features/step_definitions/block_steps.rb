@@ -7,10 +7,10 @@ When('I visit the preview page') do
   visit preview_blocks_path
 end
 
-# Actions
-When('I click the generate blocks button') do
-  click_button('GENERATE NEW BLOCKS')
-end
+# # Actions
+# When('I click the generate blocks button') do
+#   click_button('GENERATE NEW BLOCKS')
+# end
 
 When('I click the export link') do
   click_link('EXPORT TO EXCEL')
