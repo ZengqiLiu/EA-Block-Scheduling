@@ -56,7 +56,7 @@ class RegistrationsController < ApplicationController
         errors << "corequisites: #{f[:missing_coreqs].join(', ')}" if f[:missing_coreqs].any?
         "#{f[:course]} (missing #{errors.join('; ')})"
       end.join("; ")
-      edirect_to register_path and return
+      redirect_to register_path and return
     else
       flash[:notice] = "Successfully registered for: #{wanted_courses.join(', ')}"
       normalized = wanted_courses.map { |name| name.strip.upcase }
