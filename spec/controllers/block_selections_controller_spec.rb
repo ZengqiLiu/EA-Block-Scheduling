@@ -72,38 +72,24 @@ RSpec.describe BlockSelectionsController, type: :controller do
           expect(response).to redirect_to(referer)
         end
       end
+
+      context "with no block selected" do
+        it "redirects back with an alert about selecting a block" do
+          post :create, params: { block: { selected_block_ids: [] } }
+
+          expect(flash[:alert]).to eq("No block was selected. Please select a block.")
+          expect(response).to redirect_to(referer)
+        end
+      end
+
+      context "with multiple blocks selected" do
+        it "redirects back with an alert about selecting only one block" do
+          post :create, params: { block: { selected_block_ids: ["1", "2"] } }
+
+          expect(flash[:alert]).to eq("Please only select one block.")
+          expect(response).to redirect_to(referer)
+        end
+      end
     end
   end
-
-  # describe "POST #save_standalone" do
-  #   let(:user) { create(:user) }
-  #   let(:course1) { create(:course) }
-  #   let(:course2) { create(:course) }
-
-  #   before do
-  #     allow(controller).to receive(:current_user).and_return(student_user)
-  #   end
-
-  #   context "when standalone courses are selected" do
-  #     it "creates standalone course entries and redirects back with success notice" do
-  #       expect {
-  #         post :save_standalone, params: { standalone_courses: { "0" => course1.id, "1" => course2.id } }
-  #       }.to change(StandaloneCourse, :count).by(2)
-
-  #       # expect(response).to redirect_to(blocks_path)
-  #       expect(flash[:notice]).to eq("Standalone courses saved successfully.")
-  #     end
-  #   end
-
-  #   context "when no standalone courses are selected" do
-  #     it "redirects back with an alert message" do
-  #       expect {
-  #         post :save_standalone, params: { standalone_courses: {} }
-  #       }.not_to change(StandaloneCourse, :count)
-
-  #       # expect(response).to redirect_to(blocks_path)
-  #       expect(flash[:alert]).to eq("No standalone courses selected.")
-  #     end
-  #   end
-  # end
 end

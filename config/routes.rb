@@ -70,5 +70,5 @@ Rails.application.routes.draw do
   # Add this line for selecting a block
   resource :block_selections, only: [:create]
 
-  post "blocks/save_standalone", to: "block_selections#save_standalone", as: :save_standalone_blocks
+  # post "blocks/save_standalone", to: "block_selections#save_standalone", as: :save_standalone_blocks
 end
