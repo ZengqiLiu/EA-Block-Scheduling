@@ -74,7 +74,7 @@ module CoursesHelper
   end
 
   def standalone_courses
-     ["CHEM-1309", "CHEM-1312", "PHYS-1401"]
+     ["CHEM-1311", "CHEM-1312", "PHYS-1401"]
   end
 
   def distinct_courses_by_dept(dept_code)

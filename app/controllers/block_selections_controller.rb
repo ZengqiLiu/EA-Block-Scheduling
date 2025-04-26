@@ -44,21 +44,21 @@ class BlockSelectionsController < ApplicationController
     end
   end
 
-  def save_standalone
-    selected_courses = params[:standalone_courses]&.values
+  # def save_standalone
+  #   selected_courses = params[:standalone_courses]&.values
 
-    if selected_courses.blank?
-      flash[:alert] = "No standalone courses selected."
-      redirect_back fallback_location: blocks_path and return
-    end
+  #   if selected_courses.blank?
+  #     flash[:alert] = "No standalone courses selected."
+  #     redirect_back fallback_location: blocks_path and return
+  #   end
 
-    selected_courses.each do |course_id|
-      StandaloneCourse.find_or_create_by!(user_id: current_user.id, course_id: course_id)
-    end
+  #   selected_courses.each do |course_id|
+  #     StandaloneCourse.find_or_create_by!(user_id: current_user.id, course_id: course_id)
+  #   end
 
-    flash[:notice] = "Standalone courses saved successfully."
-    redirect_back fallback_location: blocks_path
-  end
+  #   flash[:notice] = "Standalone courses saved successfully."
+  #   redirect_back fallback_location: blocks_path
+  # end
 
   private
 
