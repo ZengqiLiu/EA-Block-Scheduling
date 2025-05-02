@@ -62,7 +62,7 @@
 
   <% days = [] %>
   <% str = course.days.dup %>
-  <% days << "Th" if str.sub!("Th", "") %> <!-- Handle "Th" first to avoid "T" conflict -->
+  <% days << "Th" if str.sub!("TH", "") %> <!-- Handle "Th" first to avoid "T" conflict -->
   <% days << "M" if str.sub!("M", "") %>
   <% days << "T" if str.sub!("T", "") %>
   <% days << "W" if str.sub!("W", "") %>

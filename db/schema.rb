@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_25_031442) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_01_010424) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -81,8 +81,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_25_031442) do
     t.string "building"
     t.string "room"
     t.string "days"
-    t.time "start_time"
-    t.time "end_time"
     t.string "fac_id"
     t.string "faculty_name"
     t.integer "crs_capacity"
@@ -95,6 +93,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_25_031442) do
     t.integer "as_id"
     t.string "corequisites"
     t.string "category"
+    t.text "time_slots"
     t.index ["term", "dept_code", "syn", "sec_name"], name: "index_courses_on_unique_fields", unique: true
   end
 

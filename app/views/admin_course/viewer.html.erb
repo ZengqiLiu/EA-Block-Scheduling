@@ -1,0 +1,43 @@
+<h1 style="text-align: center;">Admin Course Viewer</h1>
+
+<div style="max-width: 600px; margin: 0 auto;">
+  <%= form_with url: admin_course_viewer_path, method: :get, local: true do %>
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px;">
+      <label for="course_id" style="margin-right: 5px; white-space: nowrap;">Select a Course:</label>
+      
+      <%= select_tag :course_id,
+        options_from_collection_for_select(@courses, :id, :sec_name, @selected_course_id),
+        prompt: "Choose a course",
+        class: "form-control",
+        style: "flex: 1; min-width: 180px; max-width: 250px; margin-top: 0px" %>
+
+      <%= submit_tag "View Students",
+        class: "btn btn--primary",
+        style: "padding: 6px 12px; margin: 0px;" %>
+    </div>
+  <% end %>
+
+  <% if @selected_course %>
+    
+    <% if @students.any? %>
+      <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+          <tr>
+            <th style="text-align: left; padding: 8px;">Name</th>
+            <th style="text-align: left; padding: 8px;">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @students.each do |student| %>
+            <tr>
+              <td style="padding: 8px;"><%= "#{student.first_name} #{student.last_name}" %></td>
+              <td style="padding: 8px;"><%= student.email %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No students are enrolled in this course.</p>
+    <% end %>
+  <% end %>
+</div>

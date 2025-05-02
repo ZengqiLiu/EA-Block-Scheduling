@@ -71,4 +71,6 @@ Rails.application.routes.draw do
   resource :block_selections, only: [:create]
 
   # post "blocks/save_standalone", to: "block_selections#save_standalone", as: :save_standalone_blocks
+  get "/admin_course_viewer", to: "admin_course#viewer", as: "admin_course_viewer"
+  # post "/admin_courses_viewer", to: "admin_course#viewer"
 end

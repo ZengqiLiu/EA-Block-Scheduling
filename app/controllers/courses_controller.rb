@@ -70,62 +70,64 @@ class CoursesController < ApplicationController
 
     unless uploaded_file
       flash[:alert] = "No file uploaded."
-      puts "⚠️ No file uploaded"
       redirect_to courses_path and return
     end
 
-    puts "📂 Uploading file: #{uploaded_file.original_filename}"
+    puts "📂 Uploading CSV file: #{uploaded_file.original_filename}"
     puts "🔗 Assigned as_id: #{as_id}"
 
-    spreadsheet = Roo::Excelx.new(uploaded_file.path)
-    sheet = spreadsheet.sheet(0)
-    headers = sheet.row(1).map { |h| h.to_s.strip.gsub("\n", " ") }
-
-    puts "📋 Headers: #{headers.inspect}"
+    require "csv"
 
     inserted = 0
     failed_rows = []
 
-    (2..sheet.last_row).each do |i|
-      row_data = Hash[[headers, sheet.row(i)].transpose]
-      puts "📄 Row #{i}: #{row_data.inspect}"
+    CSV.foreach(uploaded_file.path, headers: true) do |row|
+      row_data = row.to_h.transform_keys(&:strip)
 
+      # Extract course data
+      sec_name = row_data["Course"].to_s.strip
+      faculty_name = row_data["Instructor"]&.strip
+      building     = row_data["Location"]&.strip
+      room         = row_data["Room"]&.strip
+      days         = row_data["Days"]&.strip
+      syn          = row_data["Syn"]&.strip
+      term         = row_data["Term"]&.strip
+      time_slots  = row_data["Time"]&.strip
+      first_course_part = sec_name.split("/").first.strip
+      dept_code = first_course_part.split.first
 
-      parsed_start, parsed_end = get_parsed_times(row_data["Start Time"], row_data["End Time"])
+      raw_time_slots = time_slots.to_s.split(",").map(&:strip)
 
-      if row_data["Sec Name"]&.strip == "CHEM 1109"
-        puts "🔍 Matched CHEM 1109 @ Row #{i}: #{row_data.inspect}"
-        puts "🔍 Start Time: #{parsed_start}"
-        puts "🔍 End Time: #{parsed_end}"
-      end
-
-      if row_data["Sec Name"]&.strip == "CHEM-1109-001"
-        puts "🔍 Matched CHEM-1109-001 @ Row #{i}: #{row_data.inspect}"
-        puts "🔍 Start Time: #{parsed_start}"
-        puts "🔍 End Time: #{parsed_end}"
-      end
+      time_slots = raw_time_slots.map do |slot|
+        start_str, end_str = slot.split("-").map(&:strip)
+        begin
+          parsed_start = Time.parse(start_str).strftime("%I:%M %p")
+          parsed_end = Time.parse(end_str).strftime("%I:%M %p")
+          "#{parsed_start} - #{parsed_end}"
+        rescue
+          nil
+        end
+      end.compact
 
 
       course = Course.new(
-        term: row_data["Term"],
-        dept_code: row_data["Dept Code"]&.strip,
-        course_id: row_data["Crse Id"],
-        sec_coreq_secs: row_data["Coreq Secs"],
-        syn: row_data["Syn"],
-        sec_name: row_data["Sec Name"],
-        short_title: row_data["Short Title"],
-        im: row_data["IM"],
-        building: row_data["Bldg"],
-        room: row_data["Room"],
-        days: row_data["Days"],
-        start_time: parsed_start,
-        end_time: parsed_end,
-        fac_id: row_data["Fac ID"],
-        faculty_name: row_data["Faculty Name"],
-        crs_capacity: row_data["Crs Capacity"],
-        sec_cap: row_data["Sec Cap"],
+        term: term,
+        dept_code: dept_code,
+        course_id: nil,
+        sec_name: sec_name,
+        syn: syn,
+        short_title: nil,
+        im: nil,
+        building: building,
+        room: room,
+        days: days,
+        time_slots: time_slots.join(", "),
+        fac_id: nil,
+        faculty_name: faculty_name,
+        crs_capacity: nil,
+        sec_cap: nil,
         student_count: 0,
-        notes: row_data["NOTES"],
+        notes: nil,
         prerequisites: nil,
         corequisites: nil,
         category: nil,
@@ -134,11 +136,10 @@ class CoursesController < ApplicationController
 
       if course.save
         inserted += 1
-        puts "✅ Inserted: #{course.sec_name} (row #{i})"
+        puts "✅ Inserted: #{sec_name}"
       else
-        error_message = course.errors.full_messages.join(", ")
-        puts "❌ Failed row #{i}: #{error_message}"
-        failed_rows << { row: i, errors: course.errors.full_messages }
+        puts "❌ Failed to insert row: #{course.errors.full_messages.join(', ')}"
+        failed_rows << { row: row_data, errors: course.errors.full_messages }
       end
     end
 
@@ -149,27 +150,21 @@ class CoursesController < ApplicationController
     redirect_to courses_path
   end
 
-  def parse_time_value(t)
-    return nil if t.blank?
+  # Helper to split and normalize time ranges like "9:00AM - 10:20AM"
+  def parse_time_range(time_range)
+    return [nil, nil] if time_range.blank?
 
-    t = t.to_s.strip
+    cleaned = time_range.gsub("::", ":")  # Fix any double colons
+    parts = cleaned.split("-").map(&:strip)
 
-    if t =~ /^\d+$/  # If it's all digits, assume it's seconds
-      seconds = t.to_i
-      Time.at(seconds).utc.strftime("%I:%M %p") # e.g., 50400 => "02:00 PM"
-    else
-      Time.parse(t).strftime("%I:%M %p") rescue t
+    begin
+      start_time = Time.parse(parts[0]).strftime("%I:%M %p") rescue nil
+      end_time   = Time.parse(parts[1]).strftime("%I:%M %p") rescue nil
+    rescue
+      start_time, end_time = nil, nil
     end
-  end
 
-  def get_parsed_times(start_time_raw, end_time_raw)
-    start_times = start_time_raw.to_s.split(/\n+/).map { |t| parse_time_value(t) }.compact
-    end_times   = end_time_raw.to_s.split(/\n+/).map { |t| parse_time_value(t) }.compact
-
-    parsed_start = start_times.min
-    parsed_end   = end_times.max
-
-    [parsed_start, parsed_end]
+    [start_time, end_time]
   end
 
 
