@@ -38,7 +38,7 @@ The intended users of this solution are EA staff and students.
 1. **Clone the Repository**  
    Open a terminal and run:
    ```bash
-   $git clone https://github.com/tamu-edu-students/EA-Block-Scheduling.git
+   $git clone https://github.com/patibas-tamu/EA-Block-Scheduling.git
    $cd EA-Block-Scheduling 
 
 ### Install Ruby and Dependencies
