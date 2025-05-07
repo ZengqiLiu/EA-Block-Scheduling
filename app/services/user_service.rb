@@ -4,14 +4,16 @@ class UserService
     spreadsheet = Roo::Excelx.new(file.path)
     users = []
     # Process from row 4 to the last row
-    (4..spreadsheet.last_row).each do |row|
+    (2..spreadsheet.last_row).each do |row|
       # columns are combined_name, student_id, major, email, active
       row_data = spreadsheet.row(row)
       combined_name = row_data[0]
       student_id    = row_data[1]
       major         = row_data[2]
       email         = row_data[3]
-      active        = row_data[4]
+      active        = true
+      tamu_uid      = row_data[4]
+
 
       # skip rows without email
       next if email.blank?
@@ -36,7 +38,8 @@ class UserService
         role: "student",
         active: active,
         uid: nil,
-        provider: nil
+        provider: nil,
+        tamu_uid: tamu_uid
       )
       users << user
     end
