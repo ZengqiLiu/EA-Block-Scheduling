@@ -16,10 +16,14 @@ class Course < ApplicationRecord
   end
 
   def base_course_code
-    # Standardize format first (replace spaces with hyphens)
-    standardized = sec_name.gsub(" ", "-")
-    parts = standardized.split("-")
-    "#{parts[0]}-#{parts[1]}"
+    # Standardize format first (replace spaces and slashes with hyphens)
+    standardized = sec_name.gsub(/[ \/]/, "-")
+
+    # Extract the first course section and split it into parts
+    first_course_part = standardized.split("-").first(2)
+
+    # Return the base course code (e.g., "CHEM-1309" or "PHYS-2425")
+    "#{first_course_part[0]}-#{first_course_part[1]}"
   end
 
   def prerequisite_courses

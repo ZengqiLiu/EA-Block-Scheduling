@@ -109,7 +109,7 @@ class CoursesController < ApplicationController
         end
       end.compact
 
-
+      puts "Processing course: #{sec_name}"
       course = Course.new(
         term: term,
         dept_code: dept_code,
@@ -136,7 +136,7 @@ class CoursesController < ApplicationController
 
       if course.save
         inserted += 1
-        puts "✅ Inserted: #{sec_name}"
+        # puts "✅ Inserted: #{sec_name}"
       else
         puts "❌ Failed to insert row: #{course.errors.full_messages.join(', ')}"
         failed_rows << { row: row_data, errors: course.errors.full_messages }

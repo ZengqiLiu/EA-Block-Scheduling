@@ -14,8 +14,9 @@
     <% block.courses.each do |course| %>
       <li>
         <strong><%= course.sec_name %></strong><br>
-        <%= course.days %> 
-        <%= course.start_time.strftime("%I:%M %p") %> - <%= course.end_time.strftime("%I:%M %p") %>
+        <% course.days.split(",").zip(course.time_slots.split(",")).each do |day, time_slot| %>
+          <%= day.strip %>: <%= time_slot.strip %><br>
+        <% end %>
         <span>Enrolled: <%= course.student_count %> / <%= course.sec_cap %></span>
         <!-- Hidden field for course id -->
         <input type="hidden" name="block[courses][<%= block.id %>][]" value="<%= course.id %>" class="course-id" form="block-selection-form">

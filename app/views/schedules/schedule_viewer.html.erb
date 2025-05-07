@@ -37,55 +37,60 @@
       </tbody>
     </table>
 
-    <!-- Absolute-positioned class block, spanning Monday and Tuesday -->
-    <!-- Left = 9% + 13.34% * N -->
-    <!-- Top = 55 + 19 * N -->
-    <!-- Height = 19 * N -->
-    <!-- Two Examples -->
-    <!-- <div class="class-block" data-id="1" data-name="ENGR 102" data-details="Engineering Lab I - Room 1130.02" style="top: 55px; left: 23.34%; width: 13.34%; height: 76px"> -->
-      <!-- ENGR 102 -->
-    <!-- </div> -->
+    <% # CLASS BLOCKS %>
+    <% day_map = { "M" => 1, "T" => 2, "W" => 3, "Th" => 4, "F" => 5 } %>
+    <% day_width = 13.34 %>
 
-    <!-- <div class="class-block" data-id="2" data-name="MATH 2412" data-details="PreCalculus - Room 2218" style="top: 207px; left: 36.68%; width: 13.34%; height: 57px"> -->
-      <!-- MATH 2412 -->
-    <!-- </div> -->
-    
     <% @selected_courses.each do |course| %>
-  <% intervals_from_start = ((course.start_time - initial_time) / 15.minutes).to_i %>
-  <% top_position = 55 + (intervals_from_start * 19) %>
-  <% duration_intervals = ((course.end_time - course.start_time) / 15.minutes).to_i %>
-  <% height_position = 19 * duration_intervals %>
+  <% names = course.sec_name.split("/").map(&:strip) %> <!-- Split names -->
+  <% days_strings = Array(course.days).flat_map { |ds| ds.split(",").map(&:strip) } %>
+  <% time_ranges = Array(course.time_slots).flat_map { |ts| ts.split(",").map(&:strip) } %>
 
-  <% # Day map (handles "Th" specially to avoid confusion with "T") %>
-  <% day_map = { "M" => 1, "T" => 2, "W" => 3, "Th" => 4, "F" => 5 } %>
-  <% day_width = 13.34 %>
+  <% days_strings.each_with_index do |days_string, idx| %>
+    <% time_range = time_ranges[idx] || time_ranges.first %>
+    <% next if time_range.blank? || days_string.blank? %>
 
-  <% days = [] %>
-  <% str = course.days.dup %>
-  <% days << "Th" if str.sub!("TH", "") %> <!-- Handle "Th" first to avoid "T" conflict -->
-  <% days << "M" if str.sub!("M", "") %>
-  <% days << "T" if str.sub!("T", "") %>
-  <% days << "W" if str.sub!("W", "") %>
-  <% days << "F" if str.sub!("F", "") %>
+    <% start_str, end_str = time_range.split("-").map(&:strip) %>
+    <% start_time = Time.parse("2000-01-01 #{start_str} UTC") %>
+    <% end_time = Time.parse("2000-01-01 #{end_str} UTC") %>
 
-  <% days.each do |d| %>
-    <% day_index = day_map[d] %>
-    <% left_position = 10 + (day_index * day_width) %>
+    <% intervals_from_start = ((start_time - initial_time) / 15.minutes).to_i %>
+    <% top_position = 55 + (intervals_from_start * 19) %>
+    <% duration_intervals = ((end_time - start_time) / 15.minutes).to_i %>
+    <% height_position = 19 * duration_intervals %>
 
-    <div class="class-block"
-        data-id="<%= course.id %>"
-        data-name="<%= course.sec_name %>"
-        data-details="<%= course.short_title %>"
-        style="top: <%= top_position %>px; left: <%= left_position %>%; width: <%= day_width %>%; height: <%= height_position %>px">
-      <div><strong><%= course.sec_name %></strong></div>
-      <div><%= course.start_time.strftime("%I:%M %p") %> - <%= course.end_time.strftime("%I:%M %p") %></div>
-    </div>
+    <% # Handle "Th" first in days parsing %>
+    <% days = [] %>
+    <% str = days_string.dup.upcase %>
+    <% days << "Th" if str.sub!("TH", "") %>
+    <% days << "M" if str.sub!("M", "") %>
+    <% days << "T" if str.sub!("T", "") %>
+    <% days << "W" if str.sub!("W", "") %>
+    <% days << "F" if str.sub!("F", "") %>
+
+    <% # Pick the correct name: names[idx] if available, else names.first %>
+    <% course_name = names[idx] || names.first %>
+
+    <% days.each do |d| %>
+      <% day_index = day_map[d] %>
+      <% left_position = 10 + (day_index * day_width) %>
+
+      <div class="class-block"
+          data-id="<%= course.id %>"
+          data-name="<%= course_name %>"
+          data-details="<%= course.short_title %>"
+          style="top: <%= top_position %>px; left: <%= left_position %>%; width: <%= day_width %>%; height: <%= height_position %>px">
+        <div><strong><%= course_name %></strong></div>
+        <div><%= start_time.strftime("%I:%M %p") %> - <%= end_time.strftime("%I:%M %p") %></div>
+      </div>
+    <% end %>
   <% end %>
-
 <% end %>
+
+
   </div>
 
-  <!-- Single Modal for displaying class details dynamically -->
+  <!-- Modal -->
   <div id="classModal" class="class-modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
@@ -95,7 +100,6 @@
   </div>
 
   <%= javascript_include_tag 'schedule_viewer' %>
-
 
 </body>
 </html>

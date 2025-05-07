@@ -9,11 +9,8 @@ class Block
   end
 
   # Validations
-  # validates_length_of :courses, is: 3, message: "must have exactly 4 courses"
   validate :no_time_conflicts
-  # validate :has_required_category
   validate :no_duplicate_course_numbers
-  # validate :no_prerequisites_in_block
 
   # Add this method to help with creation
   def self.create_with_courses(courses)
@@ -26,18 +23,13 @@ class Block
     valid_blocks = []
     return valid_blocks if courses.blank?
 
-    # all_courses = Course.all.to_a
     unique_courses = courses.uniq { |course| course.base_course_code }
-
-    # Rails.logger.info "Found #{all_courses.length} total courses"
-    Rails.logger.info "Found #{unique_courses.length} matching unique base courses"
-
-    # Simplified combination check
+    puts "Unique courses: #{unique_courses.map(&:sec_name).join(', ')}"
     courses.combination(unique_courses.length).each do |course_combo|
+      puts "Checking combination: #{course_combo.map(&:sec_name).join(', ')}"
       add_valid_block(valid_blocks, course_combo)
     end
 
-    Rails.logger.info "Generation complete. Found #{valid_blocks.length} valid blocks."
     valid_blocks
   end
 
@@ -45,16 +37,8 @@ class Block
 
   def self.add_valid_block(valid_blocks, course_combo)
     block = new(course_combo)
-    # puts course_combo
-    # puts "*********************"
-    # puts block.courses.map(&:sec_name).join(", ")
-    # puts "*********************"
-    puts SecureRandom.uuid
     if block.valid?
-      # puts "=========================="
-      # puts "Found valid block #{valid_blocks.length + 1}: #{block.courses.map(&:sec_name).join(', ')}"
       valid_blocks << block
-      Rails.logger.info "Found valid block #{valid_blocks.length}: #{block.courses.map(&:sec_name).join(', ')}" if valid_blocks.length % 10 == 0
     end
   end
 
@@ -65,6 +49,7 @@ class Block
 
     course_list.each_with_index do |course1, i|
       course_list[(i + 1)..-1].each do |course2|
+        # puts "Checking before time conflict between #{course1.sec_name} and #{course2.sec_name}"
         if time_conflict?(course1, course2)
           errors.add(:base, "Time conflict between #{course1.sec_name} and #{course2.sec_name}")
         end
@@ -73,30 +58,67 @@ class Block
   end
 
   def time_conflict?(course1, course2)
+    # puts "Checking time conflict between #{course1.sec_name} and #{course2.sec_name}"
     return false unless course1.days.present? && course2.days.present?
 
-    # Get individual days for each course
-    days1 = parse_to_individual_days(course1.days)
-    days2 = parse_to_individual_days(course2.days)
+    sessions1 = expand_sessions(course1.days, course1.time_slots)
+    sessions2 = expand_sessions(course2.days, course2.time_slots)
+    # puts "Sessions for #{course1.sec_name}: #{sessions1.inspect}"
+    # puts "Sessions for #{course2.sec_name}: #{sessions2.inspect}"
 
-    # Check if they share any days
-    common_days = days1 & days2
-    return false if common_days.empty?
+    sessions1.each do |day1, start1, end1|
+      sessions2.each do |day2, start2, end2|
+        if day1 == day2 && overlap?(start1, end1, start2, end2)
+          return true
+        end
+      end
+    end
 
-    # If they share days, check time overlap
-    start1 = Time.parse(course1.start_time.to_s)
-    end1 = Time.parse(course1.end_time.to_s)
-    start2 = Time.parse(course2.start_time.to_s)
-    end2 = Time.parse(course2.end_time.to_s)
+    false
+  end
 
+  def expand_sessions(days_input, time_slots_input)
+    expanded = []
+
+    # Fix here: properly split days and times if comma-separated
+    days_list = days_input.is_a?(Array) ? days_input : days_input.split(",").map(&:strip)
+    time_slots_list = time_slots_input.is_a?(Array) ? time_slots_input : time_slots_input.split(",").map(&:strip)
+
+    days_list.each_with_index do |days_string, idx|
+      time_range = time_slots_list[idx] || time_slots_list.first
+      next if days_string.blank? || time_range.blank?
+
+      start_str, end_str = time_range.split("-").map(&:strip)
+      start_time = Time.parse("2000-01-01 #{start_str} UTC")
+      end_time = Time.parse("2000-01-01 #{end_str} UTC")
+
+      str = days_string.dup.upcase
+      day_letters = []
+      day_letters << "Th" if str.sub!("TH", "")
+      day_letters << "M" if str.sub!("M", "")
+      day_letters << "T" if str.sub!("T", "")
+      day_letters << "W" if str.sub!("W", "")
+      day_letters << "F" if str.sub!("F", "")
+
+      day_letters.each do |day|
+        expanded << [day, start_time, end_time]
+      end
+    end
+
+    expanded
+  end
+
+  def overlap?(start1, end1, start2, end2)
     !(end1 <= start2 || end2 <= start1)
   end
 
-  def parse_to_individual_days(days_string)
-    return [] unless days_string.present?
-    days = []
+  def parse_to_individual_days(days_input)
+    return [] unless days_input.present?
 
-    # Simplified day checks
+    # Normalize input to a single string if it's an array
+    days_string = days_input.is_a?(Array) ? days_input.join(", ") : days_input
+
+    days = []
     add_days_to_array(days, days_string)
     days
   end
@@ -106,15 +128,13 @@ class Block
 
     day_patterns = {
       "M" => "M",
+      "T" => "T",
       "W" => "W",
       "Th" => "Th",
       "F" => "F"
     }
 
-    # Handle T/TTh separately since it has special logic
-    days << "T" if days_string.match?(/^(T|TTh)$/)
-
-    # Handle other days
+    # Handle each day pattern
     day_patterns.each do |pattern, day|
       days << day if days_string.include?(pattern)
     end
@@ -122,14 +142,18 @@ class Block
 
   def no_duplicate_course_numbers
     return unless courses.present?
-    course_numbers = get_course_numbers
 
-    if course_numbers.uniq.length != course_numbers.length
+    base_codes = courses.map do |course|
+      course.base_course_code if course.respond_to?(:base_course_code)
+    end.compact
+
+    puts "Base codes in check: #{base_codes.inspect}"
+
+    if base_codes.uniq.length != base_codes.length
       errors.add(:base, "Cannot have multiple sections of the same course")
     end
   end
 
-  private
 
   def get_course_numbers
     courses.map do |course|
@@ -137,5 +161,14 @@ class Block
       parts = course.sec_name.split(/[-\s]/)
       parts.take(2).join("-")
     end.compact
+  end
+
+  def parse_time_slots(time_slots_input)
+    return [] unless time_slots_input.present?
+
+    Array(time_slots_input).map do |slot|
+      start_str, end_str = slot.split("-").map(&:strip)
+      [Time.parse("2000-01-01 #{start_str} UTC"), Time.parse("2000-01-01 #{end_str} UTC")]
+    end
   end
 end
